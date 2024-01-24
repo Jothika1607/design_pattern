@@ -6,15 +6,24 @@
         'expanded': sidebarPinned,
       }"
     />
-
-    <h2 class="title py-1 mb-0">
+    <!-- <h2 class="title py-1 mb-0">
       <slot name="title" />
-    </h2>
-
+    </h2> -->
+    <!-- <div>
+      <img src="" alt="DataSirpi"/>
+    </div> -->
+    <div class="icon-logo">
+      <img
+      width="78px"
+      height="32px"
+      src="
+      http://52.66.61.197:18080/assets/logo.png"/>
+    </div>
+ 
     <div class="tools-wrapper py-1 ml-auto">
       <slot name="tools" />
     </div>
-
+ 
     <div class="d-flex align-items-center ml-auto">
       <b-button
         v-if="!hideAppSelector && !settings.hideAppSelector"
@@ -30,7 +39,7 @@
           :icon="['fas', 'grip-horizontal']"
         />
       </b-button>
-
+ 
       <b-dropdown
         v-if="!settings.hideHelp"
         data-test-id="dropdown-helper"
@@ -102,7 +111,7 @@
           {{ frontendVersion }}
         </b-dropdown-item>
       </b-dropdown>
-
+ 
       <b-dropdown
         v-if="!settings.hideProfile"
         data-test-id="dropdown-profile"
@@ -123,7 +132,7 @@
               'background-image': avatarExists  ? `url(${profileAvatarUrl})` : 'none',
             }"
           />
-
+ 
           <div
             v-else
             class="d-flex align-items-center justify-content-center"
@@ -181,9 +190,12 @@
         </b-dropdown-item>
       </b-dropdown>
     </div>
+    <div class="w-100">
+     <slot name="top-nav-bar"/>
+    </div>
   </div>
 </template>
-
+ 
 <script>
 export default {
   props: {
@@ -192,113 +204,115 @@ export default {
       required: true,
       default: false,
     },
-
+ 
     hideAppSelector: {
       type: Boolean,
       required: false,
       default: false,
     },
-
+ 
     appSelectorURL: {
       type: String,
       default: '../'
     },
-
+ 
     settings: {
       type: Object,
       required: true,
     },
-
+ 
     labels: {
       type: Object,
       required: true,
     },
   },
-
+ 
   computed: {
     userProfileURL () {
       return this.$auth.cortezaAuthURL
     },
-
+ 
     changePasswordURL () {
       return `${this.$auth.cortezaAuthURL}/change-password`
     },
-
+ 
     documentationURL () {
       const [year, month] = VERSION.split('.')
       return `https://docs.cortezaproject.org/corteza-docs/${year}.${month}/index.html`
     },
-
+ 
     helpLinks () {
       const { helpLinks = [] } = this.settings || {}
       return (helpLinks || []).filter(({ handle, url }) => handle && url)
     },
-
+ 
     profileLinks () {
       const { profileLinks = [] } = this.settings || {}
       return (profileLinks || []).filter(({ handle, url }) => handle && url)
     },
-
+ 
     onlyVersion () {
       const {
         hideForumLink,
         hideDocumentationLink,
         hideFeedbackLink,
       } = this.settings || {}
-
+ 
       return !this.helpLinks.length && hideForumLink && hideDocumentationLink && hideFeedbackLink
     },
-
+ 
     frontendVersion () {
       /* eslint-disable no-undef */
       return VERSION
     },
-
+ 
     profileAvatarUrl () {
       return `${this.$SystemAPI.baseURL}/attachment/avatar/${this.$auth.user.meta.avatarID}/original/profile-photo-avatar`
     },
-
+ 
     avatarExists () {
       return this.$auth.user.meta.avatarID !== "0" && this.$auth.user.meta.avatarID
     },
   }
 }
 </script>
-
+ 
 <style lang="scss" scoped>
-$header-height: 64px;
-$nav-width: 320px;
+$header-height: 96px;
+$nav-width: 1440px;
 $nav-icon-size: 40px;
-$nav-user-icon-size: 50px;
-
+$nav-user-icon-size: 40px;
+ 
 .icon-logo {
-  height: calc(#{$header-height} / 2);
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 126px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+ 
 .nav-icon {
   width: $nav-icon-size;
   height: $nav-icon-size;
 }
-
+ 
 .nav-user-icon {
   min-width: $nav-user-icon-size;
   min-height: $nav-user-icon-size;
 }
-
+ 
 .header-navigation {
   width: 100vw;
   min-height: $header-height;
   background-color: var(--body-bg);
 }
-
+ 
 .avatar {
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
+ 
   &:hover {
     opacity: 0.8;
     transition: opacity .25s ease-in-out;
@@ -306,14 +320,14 @@ $nav-user-icon-size: 50px;
     -webkit-transition: opacity .25s ease-in-out;
   }
 }
-
+ 
 .spacer {
   min-width: 0px;
   -webkit-transition: min-width 0.15s ease-in-out;
   -moz-transition: min-width 0.15s ease-in-out;
   -o-transition: min-width 0.15s ease-in-out;
   transition: min-width 0.15s ease-in-out;
-
+ 
   &.expanded {
     min-width: calc(#{$nav-width} - 42px);
     -webkit-transition: min-width 0.2s ease-in-out;
@@ -322,13 +336,13 @@ $nav-user-icon-size: 50px;
     transition: min-width 0.2s ease-in-out;
   }
 }
-
+ 
 .title {
   display: flex;
   align-items: center;
   min-height: $header-height;
   padding-left: calc(3.5rem + 6px);
-
+ 
   .vue-portal-target {
     display: -webkit-box; /* For Safari and old versions of Chrome */
     display: -ms-flexbox; /* For old versions of IE */
@@ -338,10 +352,10 @@ $nav-user-icon-size: 50px;
     text-overflow: ellipsis;
   }
 }
-
+ 
 .tools-wrapper {
   flex-grow: 1;
-
+ 
   .vue-portal-target {
     display: flex;
     justify-content: end;
@@ -350,7 +364,7 @@ $nav-user-icon-size: 50px;
   }
 }
 </style>
-
+ 
 <style lang="scss">
 .topbar-dropdown-menu {
   z-index: 1100;

@@ -4,19 +4,20 @@
       v-for="({page = {}, params = {}, children = []}) of items"
       :key="pageIndex(page)"
       variant="link"
-      class="w-100 text-dark text-decoration-none p-0 pt-2 nav-item"
+      class="w-100 text-dark text-decoration-none p-0 nav-item d-flex"
       active-class="nav-active"
       exact-active-class="nav-active"
       :title="page.title"
       :to="{ name: page.name || defaultRouteName, params }"
     >
       <span
-        class="d-inline-block w-75 text-nowrap text-truncate"
+        class="d-inline-block text-nowrap text-truncate"
         @click="closeSidebar()"
       >
         <template
           v-if="page.icon"
         >
+        <!-- <font-awesome-icon :icon="['fas', 'users']" /> -->
           <font-awesome-icon
             v-if="Array.isArray(page.icon)"
             class="icon"
@@ -36,34 +37,33 @@
           {{ page.title }}
         </label>
       </span>
-
+ 
       <template
         v-if="children.length"
       >
         <b-button
-          variant="outline-light"
+          variant="None"
           size="sm"
-          class="text-primary p-0 border-0 float-right mr-1"
+          class="text-primary p-0 border-0 float-right mr-1 caret-button"
           @click.self.stop.prevent="toggle(page)"
         >
           <font-awesome-icon
             v-if="!collapses[pageIndex(page)]"
             class="pointer-none"
-            :icon="['fas', 'chevron-down']"
+            :icon="['fas', 'caret-down']"
           />
           <font-awesome-icon
             v-else
             class="pointer-none"
-            :icon="['fas', 'chevron-up']"
+            :icon="['fas', 'caret-up']"
           />
         </b-button>
-
-        <b-collapse
+ 
+        <b-collapse class="position-absolute sub-nav-item"
           :visible="collapses[pageIndex(page)]"
           @click.stop.prevent
         >
-          <c-sidebar-nav-items
-            class="ml-2"
+          <c-top-navbar-items
             :items="children"
             :start-expanded="startExpanded"
             :default-route-name="defaultRouteName"
@@ -74,11 +74,11 @@
     </b-button>
   </div>
 </template>
-
+ 
 <script>
 export default {
-  name: 'CSidebarNavItems',
-
+  name: 'CTopNavbarItems',
+ 
   props: {
     /*
     * {
@@ -100,13 +100,13 @@ export default {
       required: false,
     },
   },
-
+ 
   data () {
     return {
       collapses: {},
     }
   },
-
+ 
   watch: {
     items: {
       immediate: true,
@@ -119,78 +119,105 @@ export default {
       },
     },
   },
-
+ 
   methods: {
     closeSidebar () {
       if (window.innerWidth < 576) {
         this.$root.$emit('close-sidebar')
       }
     },
-
+ 
     pageIndex (p) {
       return p.pageID || p.name || p.title
     },
-
+ 
     toggle (p) {
       const px = this.pageIndex(p)
       this.$set(this.collapses, px, !this.collapses[px])
     },
-
+ 
     // Recursively check for child pages that are open, so that parents can open as well
     showChildren ({ params = {}, children = [] }) {
       const partialParamsMatch = Object.entries(params).some(([key, value]) => {
         return this.$route.params[key] === value
       })
-
+ 
       if (partialParamsMatch) {
         return partialParamsMatch
       }
-
+ 
       return children.map(c => this.showChildren(c)).some(isOpen => isOpen)
     },
   },
 }
 </script>
-
+ 
 <style scoped lang="scss">
 // This has to be there, so chevrons are clickable inside the button
 .pointer-none {
   pointer-events: none;
 }
-
+.caret-button{
+  width:40px;
+  height: 40px;
+  margin-left: 8px;
+}
+ 
 .svg-inline--fa {
   width: 30px;
 }
-
+ 
+.sub-nav-item{
+  position: absolute;
+  transform: translateY(81px);
+  z-index: 2;
+  >div{
+    background: white;
+    border: 1px solid white;
+    flex-direction: column;
+  }
+  
+  .nav-sidebar {
+    width: 199px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    transform: translateX(-21px);
+  }
+ 
+  .nav-active{
+    border-bottom-color: white !important;
+  }
+}
+ 
 .nav-item > span {
   .title {
     color: var(--tertiary);
   }
 }
-
+ 
 .nav-item:hover > span {
   .title {
     color: var(--primary);
     transition: color 0.25s;
   }
 }
-
+ 
 .nav-active > span > {
   .icon {
     color: var(--primary)
   }
-
+ 
   .title {
     font-family: 'Roboto-Regular';
     color: var(--primary);
     transition: color 0.5s
   }
 }
-
+ 
 .nav-item {
   text-align: left;
 }
-
+ 
 [dir="rtl"] {
   .nav-item {
     text-align: right;

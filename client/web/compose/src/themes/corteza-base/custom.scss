@@ -1,3 +1,14 @@
+// Adding ROBOTO Font Style
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("./fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
+ 
+*{
+  font-family: "Roboto-Regular" !important;
+  font-size: 19px;
+  font-weight: 400;
+}
 /* stylelint-disable no-descending-specificity */
 .bg-gray {
   background-color: var(--gray-200);
@@ -293,4 +304,80 @@ fieldset.required {
     break-inside: avoid;
     width: 100%;
   }
+}
+
+header .header-navigation{
+  background-color: white;
+}
+ 
+a.nav-item{
+  align-items:center;
+  border: 3px solid white;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  --primary: #3D6ECF !important;
+  max-width: 176px;
+ 
+  span{
+    display: inline !important;
+ 
+  label{
+    display: inline !important;
+  }
+  }
+ 
+  img{
+    height: 40px !important;
+    width: 40px !important;
+  }
+}
+ 
+.nav-item {
+    label{
+      --tertiary: #525252 !important;
+    }
+    svg{
+    color: #525252 !important;
+    }
+  }
+  
+a.nav-active{
+    border-bottom-color:#3D6ECF;
+  }
+ 
+.nav-item:focus{
+  border-bottom-color:#3D6ECF;
+  svg{
+    color: #3D6ECF !important;
+  }
+}
+ 
+a.nav-item:hover{
+  border-bottom-color:#3D6ECF !important;
+  svg{
+    color: #3D6ECF !important;
+  }
+}
+ 
+div.nav-sidebar{
+  display: flex !important;
+  width: 100% !important;
+  height: 80px !important;
+  line-height: normal;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+ 
+div.sub-nav-item a:hover{
+  --primary: #3D6ECF;
+  border-bottom-color: white !important;
+}
+ 
+div.sub-nav-item a:focus{
+  --primary: #3D6ECF;
+  border-bottom-color: white !important;
+}
+ 
+main{
+  background-color: #FBFBFB
 }

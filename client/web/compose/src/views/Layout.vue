@@ -29,10 +29,13 @@
         <template #avatar-dropdown>
           <portal-target name="topbar-avatar-dropdown" />
         </template>
+        <template #top-nav-bar>
+          <portal-target name="nav-bar" />
+        </template>
       </c-topbar>
     </header>
 
-    <aside>
+    <!-- <aside>
       <c-sidebar
         :expanded.sync="expanded"
         :pinned.sync="pinned"
@@ -54,7 +57,7 @@
           <portal-target name="sidebar-footer-expanded" />
         </template>
       </c-sidebar>
-    </aside>
+    </aside> -->
 
     <main class="d-inline-flex h-100 overflow-auto d-print-flex">
       <!--
@@ -114,7 +117,7 @@
 import moment from 'moment'
 import CTranslationModal from '../components/Translator/CTranslatorModal'
 import { components } from '@cortezaproject/corteza-vue'
-const { CToaster, CPrompts, CPermissionsModal, CTopbar, CSidebar } = components
+const { CToaster, CPrompts, CPermissionsModal, CTopbar } = components
 
 export default {
   i18nOptions: {
@@ -126,7 +129,6 @@ export default {
     CTranslationModal,
     CPermissionsModal,
     CTopbar,
-    CSidebar,
     CToaster, // Only used for reminders
   },
 
