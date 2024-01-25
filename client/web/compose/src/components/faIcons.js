@@ -68,6 +68,7 @@ import {
   faCaretDown,
   faCaretUp,
   faUsers,
+  faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -89,7 +90,6 @@ import {
   faCopy,
   faPlusSquare,
   faEnvelope,
-  faQuestionCircle,
   faSave,
   faUser,
 } from '@fortawesome/free-regular-svg-icons'
@@ -184,4 +184,5 @@ library.add(
   faCaretDown,
   faCaretUp,
   faUsers,
+  faSearch,
 )

@@ -19,26 +19,77 @@
       src="
       http://52.66.61.197:18080/assets/logo.png"/>
     </div>
+
+    <div class="search-container">
+      <input
+              v-model="searchTerm"
+              @input="handleInput"
+              type="text"
+              placeholder="   Search case here"
+              class="search-bar"
+            />
+      <span class="search-icon">
+        <font-awesome-icon :icon="['fas', 'search']" />
+      </span>
+      </div>   
  
     <div class="tools-wrapper py-1 ml-auto">
       <slot name="tools" />
     </div>
  
-    <div class="d-flex align-items-center ml-auto">
+    <div class="d-flex align-items-center ml-auto icon-space">
+        <div class="d-flex icon-colour">
       <b-button
         v-if="!hideAppSelector && !settings.hideAppSelector"
         data-test-id="app-selector"
         variant="outline-light"
-        :href="appSelectorURL"
         title="Apps"
         size="lg"
-        class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap"
+        :href="appSelectorURL"
+        class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap icon-position"
       >
-        <font-awesome-icon
-          class="m-0 h5"
+        <!-- <font-awesome-icon
+          class="m-0 h5 icon-size"
           :icon="['fas', 'grip-horizontal']"
-        />
+        /> -->
+
+        <font-awesome-icon
+        class="m-0 h5 icon-size"
+        :icon="['fas', 'grip-horizontal']"
+        flip="vertical"       
+      />
+      
+
       </b-button>
+          <b-dropdown
+             text="Case Management"
+             variant="outline-light"
+             class="m-md-2 dropdown-style"
+             no-caret
+           >
+               <b-dropdown-item>Case Management</b-dropdown-item>
+               <b-dropdown-item href="http://52.66.61.197:18080/admin/system/application/list">Admin View</b-dropdown-item>
+           </b-dropdown>
+           <div class="caret-down-position">
+            <font-awesome-icon
+             class="pointer-none"
+             :icon="['fas', 'caret-down']"
+           />
+         </div>  
+         </div>
+
+         <b-button
+         v-if="!hideAppSelector && !settings.hideAppSelector"
+         data-test-id="app-selector"
+         variant="outline-light"
+         size="lg"
+         class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap"
+       >
+         <font-awesome-icon
+           class="m-0 h5 icon-size"
+           :icon="['far', 'bell']"
+         />
+       </b-button>
  
       <b-dropdown
         v-if="!settings.hideHelp"
@@ -56,8 +107,8 @@
             class="d-flex align-items-center justify-content-center"
           >
             <font-awesome-icon
-              class="m-0 h5"
-              :icon="['far', 'question-circle']"
+              class="m-0 h5 icon-size"
+              :icon="['fas', 'question-circle']"
             />
             <span class="sr-only">
               {{ labels.helpForum }}
@@ -363,6 +414,55 @@ $nav-user-icon-size: 40px;
     flex-wrap: wrap;
   }
 }
+
+.icon-size {
+    width: 40px;
+    height: 40px;
+    margin-left:56px ;
+}
+
+.icon-space{
+  gap: 56px;
+}
+.icon-position{
+  margin-top: 15px;
+}
+
+.caret-down-position{
+  margin-left: 4px;
+}
+
+.icon-colour :hover{
+  color: linear-gradient(90deg, rgba(50,212,115,1) 0%, rgba(255,187,82,1) 34%, rgba(255,113,100,1) 100%);
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 40px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+ 
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  color:#373737;
+  pointer-events: none;
+  margin-top: 3px;
+}
+
+.search-bar{
+    width: 497px;
+    height: 48px;
+    border-radius: 8px;
+    border-color: #373737;
+}
+
 </style>
  
 <style lang="scss">

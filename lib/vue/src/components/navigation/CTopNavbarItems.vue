@@ -41,28 +41,30 @@
       <template
         v-if="children.length"
       >
-        <b-button
-          variant="None"
-          size="sm"
-          class="text-primary p-0 border-0 float-right mr-1 caret-button"
-          @click.self.stop.prevent="toggle(page)"
-        >
-          <font-awesome-icon
-            v-if="!collapses[pageIndex(page)]"
-            class="pointer-none"
-            :icon="['fas', 'caret-down']"
-          />
-          <font-awesome-icon
-            v-else
-            class="pointer-none"
-            :icon="['fas', 'caret-up']"
-          />
-        </b-button>
- 
-        <b-collapse class="position-absolute sub-nav-item"
-          :visible="collapses[pageIndex(page)]"
-          @click.stop.prevent
-        >
+      <b-button
+      variant="None"
+      size="sm"
+      class="text-primary p-0 border-0 float-right mr-1 caret-button"
+      @click.self.stop.prevent="toggle(page)"
+    >
+      <font-awesome-icon
+        v-if="!collapses[pageIndex(page)]"
+        class="pointer-none"
+        :icon="['fas', 'caret-down']"
+      />
+      <font-awesome-icon
+        v-else
+        class="pointer-none"
+        :icon="['fas', 'caret-up']"
+      />
+    </b-button>
+
+    <b-collapse
+      class="position-absolute sub-nav-item"
+      :visible="collapses[pageIndex(page)]"
+      @click.stop.prevent
+      ref="dropdown"
+    >
           <c-top-navbar-items
             :items="children"
             :start-expanded="startExpanded"
@@ -127,13 +129,24 @@ export default {
       }
     },
  
-    pageIndex (p) {
-      return p.pageID || p.name || p.title
+    toggle(p) {
+      const px = this.pageIndex(p);
+      this.$set(this.collapses, px, !this.collapses[px]);
     },
- 
-    toggle (p) {
-      const px = this.pageIndex(p)
-      this.$set(this.collapses, px, !this.collapses[px])
+    pageIndex(p) {
+      return p.pageID || p.name || p.title;
+    },
+    closeDropdownOnOutsideClick(event) {
+      // Check if the clicked element is outside the dropdown
+      if (
+        this.$refs.dropdown &&
+        !this.$refs.dropdown.$el.contains(event.target)
+      ) {
+        // Close the dropdown
+        this.collapses.forEach((_, index) => {
+          this.collapses[index] = false;
+        });
+      }
     },
  
     // Recursively check for child pages that are open, so that parents can open as well
@@ -148,6 +161,15 @@ export default {
  
       return children.map(c => this.showChildren(c)).some(isOpen => isOpen)
     },
+  },
+
+  mounted() {
+    // Add a global click event listener
+    document.addEventListener("click", this.closeDropdownOnOutsideClick);
+  },
+  beforeDestroy() {
+    // Remove the global click event listener to prevent memory leaks
+    document.removeEventListener("click", this.closeDropdownOnOutsideClick);
   },
 }
 </script>
@@ -178,7 +200,7 @@ export default {
   }
   
   .nav-sidebar {
-    width: 199px !important;
+    width: 100% !important;
     padding-left: 0px !important;
     padding-right: 0px !important;
     transform: translateX(-21px);

@@ -316,7 +316,6 @@ a.nav-item{
   padding-left: 24px !important;
   padding-right: 24px !important;
   --primary: #3D6ECF !important;
-  max-width: 176px;
  
   span{
     display: inline !important;
@@ -380,4 +379,35 @@ div.sub-nav-item a:focus{
  
 main{
   background-color: #FBFBFB
+}
+
+.header-navigation div.nav-icon svg {
+position: absolute;
+  }
+
+.dropdown-style button{
+    background-color: white;
+    color: black;
+    border-color: white;
+    font-family: "Roboto-Regular";
+    font-size: 24px;
+    font-weight: 500;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+.caret-down-position svg{
+  position: absolute;
+  margin-top: 23px;
+}
+
+.dropdown-toggle {
+  background-color: white !important;
+  border-color: white !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.dropdown-menu{
+  border-color: white;
 }
