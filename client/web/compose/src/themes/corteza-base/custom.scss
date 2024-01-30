@@ -317,44 +317,9 @@ a.nav-item{
   padding-right: 24px !important;
   --primary: #3D6ECF !important;
  
-  span{
-    display: inline !important;
- 
-  label{
-    display: inline !important;
-  }
-  }
- 
   img{
     height: 40px !important;
     width: 40px !important;
-  }
-}
- 
-.nav-item {
-    label{
-      --tertiary: #525252 !important;
-    }
-    svg{
-    color: #525252 !important;
-    }
-  }
-  
-a.nav-active{
-    border-bottom-color:#3D6ECF;
-  }
- 
-.nav-item:focus{
-  border-bottom-color:#3D6ECF;
-  svg{
-    color: #3D6ECF !important;
-  }
-}
- 
-a.nav-item:hover{
-  border-bottom-color:#3D6ECF !important;
-  svg{
-    color: #3D6ECF !important;
   }
 }
  
@@ -367,16 +332,6 @@ div.nav-sidebar{
   padding-right: 24px !important;
 }
  
-div.sub-nav-item a:hover{
-  --primary: #3D6ECF;
-  border-bottom-color: white !important;
-}
- 
-div.sub-nav-item a:focus{
-  --primary: #3D6ECF;
-  border-bottom-color: white !important;
-}
- 
 main{
   background-color: #FBFBFB
 }
@@ -387,19 +342,14 @@ position: absolute;
 
 .dropdown-style button{
     background-color: white;
-    color: black;
-    border-color: white;
+    color: #525252 !important;
+    border-color: none;
     font-family: "Roboto-Regular";
     font-size: 24px;
     font-weight: 500;
     padding-left: 0px;
     padding-right: 0px;
   }
-
-.caret-down-position svg{
-  position: absolute;
-  margin-top: 23px;
-}
 
 .dropdown-toggle {
   background-color: white !important;
@@ -411,3 +361,78 @@ position: absolute;
 .dropdown-menu{
   border-color: white;
 }
+
+a.nav-item{
+ color: #525252 !important;
+ font-size: 19px !important;
+button.btn{
+  color: #525252;
+  font-size: 19px !important;
+  padding: 0px !important;
+}
+}
+
+a.nav-item:hover{
+  border-bottom-color:#3D6ECF !important;
+  color: #3D6ECF !important;
+  button.btn {
+    color: #3D6ECF !important;
+  }
+}
+
+a.nav-active{
+     border-bottom-color:#3D6ECF;
+     color: #3D6ECF !important;
+     button.btn {
+      color: #3D6ECF !important;
+    }
+ }
+
+ a.nav-item button.btn:focus{
+  color: #3D6ECF !important;
+}
+
+.dropdown-menu li :hover{
+  color: #3D6ECF !important;
+}
+
+.dropdown-menu li :active{
+  background-color: white;
+}
+
+.dropdown-menu li a{
+  color: #525252 !important;
+}
+
+.nav-sidebar a ul.dropdown-menu{
+  transform: translate3d(0px, 58px, 0px) !important;
+  margin-left: -51px;
+}
+
+.nav-sidebar a{
+  width: auto !important;
+}
+
+.nav-sidebar a ul{
+  max-width: 60% !important;
+  li{
+    display: inline !important;
+  }
+  a{
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+.icon-colour:hover a .icon-small{
+  width:40px;
+  height: 40px;;
+  transition: width 1s ease;
+}
+
+// .icon-colour:hover{
+//   color: #3D6ECF !important;
+//   .dropdown-style{
+//     color: #3D6ECF !important;
+//   }
+// }

@@ -25,7 +25,7 @@
               v-model="searchTerm"
               @input="handleInput"
               type="text"
-              placeholder="   Search case here"
+              placeholder="Search case here"
               class="search-bar"
             />
       <span class="search-icon">
@@ -46,7 +46,7 @@
         title="Apps"
         size="lg"
         :href="appSelectorURL"
-        class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap icon-position"
+        class="d-flex align-items-center justify-content-center border-0 nav-icon rounded-circle text-sm-nowrap icon-position"
       >
         <!-- <font-awesome-icon
           class="m-0 h5 icon-size"
@@ -54,8 +54,8 @@
         /> -->
 
         <font-awesome-icon
-        class="m-0 h5 icon-size"
-        :icon="['fas', 'grip-horizontal']"
+        class="m-0 h5 icon-small"
+        :icon="['fas', 'bars']"
         flip="vertical"       
       />
       
@@ -63,19 +63,12 @@
       </b-button>
           <b-dropdown
              text="Case Management"
-             variant="outline-light"
+             variant="none"
              class="m-md-2 dropdown-style"
-             no-caret
            >
                <b-dropdown-item>Case Management</b-dropdown-item>
                <b-dropdown-item href="http://52.66.61.197:18080/admin/system/application/list">Admin View</b-dropdown-item>
            </b-dropdown>
-           <div class="caret-down-position">
-            <font-awesome-icon
-             class="pointer-none"
-             :icon="['fas', 'caret-down']"
-           />
-         </div>  
          </div>
 
          <b-button
@@ -86,7 +79,7 @@
          class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap"
        >
          <font-awesome-icon
-           class="m-0 h5 icon-size"
+           class="m-0 h5 icon-fixed"
            :icon="['far', 'bell']"
          />
        </b-button>
@@ -107,7 +100,7 @@
             class="d-flex align-items-center justify-content-center"
           >
             <font-awesome-icon
-              class="m-0 h5 icon-size"
+              class="m-0 h5 icon-fixed"
               :icon="['fas', 'question-circle']"
             />
             <span class="sr-only">
@@ -415,33 +408,34 @@ $nav-user-icon-size: 40px;
   }
 }
 
-.icon-size {
+.icon-fixed {
     width: 40px;
     height: 40px;
     margin-left:56px ;
 }
 
+.icon-small{
+  width: 20px;
+  height: 20px;
+}
 .icon-space{
   gap: 56px;
 }
 .icon-position{
   margin-top: 15px;
+  color: #525252  !important;
 }
-
-.caret-down-position{
-  margin-left: 4px;
-}
-
 .icon-colour :hover{
-  color: linear-gradient(90deg, rgba(50,212,115,1) 0%, rgba(255,187,82,1) 34%, rgba(255,113,100,1) 100%);
+  color: #3D6ECF;
 }
 
 .search-container {
   position: relative;
   display: inline-block;
   margin-left: 40px;
-    margin-top: 24px;
-    margin-bottom: 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border: none;
 }
  
 .search-icon {
@@ -459,8 +453,10 @@ $nav-user-icon-size: 40px;
 .search-bar{
     width: 497px;
     height: 48px;
+    border: 1px solid #878787;
     border-radius: 8px;
-    border-color: #373737;
+    padding: 0px 0px 0px 10px;
+    color: #878787 !important;
 }
 
 </style>
