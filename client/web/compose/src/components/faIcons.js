@@ -69,6 +69,7 @@ import {
   faCaretUp,
   faUsers,
   faQuestionCircle,
+  faFolder,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -185,4 +186,5 @@ library.add(
   faCaretUp,
   faUsers,
   faSearch,
+  faFolder,
 )

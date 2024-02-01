@@ -424,15 +424,53 @@ a.nav-active{
   }
 }
 
-.icon-colour:hover a .icon-small{
-  width:40px;
-  height: 40px;;
-  transition: width 1s ease;
+.icon-colour:hover { 
+  div button{
+    color: #3D6ECF !important;
+  }
+  a .icon-small{
+    width: 40px;
+    height: 40px;
+    transition: all 0.5s ease-in-out;
+    color: #3D6ECF !important;
+}
 }
 
-// .icon-colour:hover{
-//   color: #3D6ECF !important;
-//   .dropdown-style{
-//     color: #3D6ECF !important;
-//   }
-// }
+.icon-colour .icon-small{
+    transition: all 0.5s ease-in-out;
+}
+
+ .button-style{
+  background-color: #3D6ECF;
+  color: #FFFFFF;
+  width: 104px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 8px !important;
+ }
+
+.search-r{
+  width:357px;
+  height: 48px;
+  padding:0px 8px;
+  border: 1px solid #878787 !important;
+  border-radius: 8px !important;
+  color: #878787 !important;
+}
+
+.button-space .btn:hover{
+  background-color: #3D6ECF;
+  color: #FFFFFF;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #F6F6F6 !important;
+}
+
+.table-hover tbody tr{
+  color: #373737 !important;
+  font-size: 16px !important;
+}
+

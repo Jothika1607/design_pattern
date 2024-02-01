@@ -5,7 +5,7 @@
       class="d-flex flex-column h-100 shadow overflow-hidden position-static"
       :class="[blockClass, cardClass]"
     >
-      <b-card-header
+      <!-- <b-card-header
         v-if="showHeader"
         class="border-0 text-nowrap pl-3 pr-2"
         header-bg-variant="white"
@@ -61,7 +61,7 @@
           v-else
           name="header"
         />
-      </b-card-header>
+      </b-card-header> -->
 
       <div
         v-if="toolbarSet"

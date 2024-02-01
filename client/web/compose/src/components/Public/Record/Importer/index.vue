@@ -2,8 +2,8 @@
   <div class="d-flex">
     <b-button
       size="lg"
-      variant="light"
-      class="flex-fill"
+      variant="none"
+      class="flex-fill button-style"
       @click="showModal=true"
     >
       {{ $t('general.label.import') }}

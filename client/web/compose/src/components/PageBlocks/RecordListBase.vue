@@ -43,35 +43,42 @@
               </template>
 
               <template v-else-if="!inlineEditing && (recordPageID || options.allRecords)">
-                <b-button
-                  v-if="!options.hideAddButton"
-                  data-test-id="button-add-record"
-                  variant="primary"
-                  size="lg"
-                  @click="handleAddRecord()"
-                >
-                  + {{ $t('recordList.addRecord') }}
-                </b-button>
+                <!-- <font-awesome-icon :icon="['fas', 'folder']" /> -->
+                <h5 class="title-style">
+                  {{ block.title }}
+                </h5>
+                <div class="d-flex ml-auto button-space">
+                  <b-button
+                    v-if="!options.hideAddButton"
+                    data-test-id="button-add-record"
+                    variant=""
+                    class="button-style"
+                    size="lg"
+                    @click="handleAddRecord()"
+                  >
+                    + {{ $t('recordList.addRecord') }}
+                  </b-button>
 
-                <importer-modal
-                  v-if="!options.hideImportButton"
-                  :module="recordListModule"
-                  :namespace="namespace"
-                  @importSuccessful="onImportSuccessful"
-                />
+                  <importer-modal
+                    v-if="!options.hideImportButton"
+                    :module="recordListModule"
+                    :namespace="namespace"
+                    @importSuccessful="onImportSuccessful"
+                  />
+
+                  <exporter-modal
+                    v-if="options.allowExport && !inlineEditing"
+                    :module="recordListModule"
+                    :filter="filter.query"
+                    :selection="selected"
+                    :selected-all-records="selectedAllRecords"
+                    :processing="processing"
+                    :preselected-fields="fields.map(({ moduleField }) => moduleField)"
+                    @export="onExport"
+                  />
+                </div>
               </template>
             </template>
-
-            <exporter-modal
-              v-if="options.allowExport && !inlineEditing"
-              :module="recordListModule"
-              :filter="filter.query"
-              :selection="selected"
-              :selected-all-records="selectedAllRecords"
-              :processing="processing"
-              :preselected-fields="fields.map(({ moduleField }) => moduleField)"
-              @export="onExport"
-            />
 
             <b-dropdown
               v-if="filterPresets.length"
@@ -111,15 +118,18 @@
               @updateFields="onUpdateFields"
             />
           </div>
+        </b-row>
 
+        <b-row>
           <div
             v-if="!options.hideSearch"
-            class="flex-fill"
+            class="flex-fill col-3 ml-auto d-flex justify-content-end"
           >
             <c-input-search
               v-model.trim="query"
-              :placeholder="$t('general.label.search')"
+              :placeholder="$t('Search case here')"
               :debounce="500"
+              class="search-r"
             />
           </div>
         </b-row>
@@ -2096,6 +2106,27 @@ td:hover .inline-actions {
 @media (max-width: 576px) {
   .flex-fill-child > * {
     flex-grow: 1;
+  }
+}
+
+.button-space{
+  gap:8px
+}
+
+.title-style{
+  color: #373737;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.record-list-table {
+  thead {
+    tr {
+      th{
+        background-color: #E7EFFD !important;
+
+      }
+    }
   }
 }
 </style>

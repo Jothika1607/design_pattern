@@ -182,7 +182,7 @@
             class="d-flex align-items-center justify-content-center"
           >
             <font-awesome-icon
-              class="m-0 h5"
+              class="m-0 h5 icon-large"
               :icon="['far', 'user']"
             />
             <span class="sr-only">
@@ -457,6 +457,11 @@ $nav-user-icon-size: 40px;
     border-radius: 8px;
     padding: 0px 0px 0px 10px;
     color: #878787 !important;
+}
+
+.icon-large {
+  width: 48px !important;
+  height: 48px !important;
 }
 
 </style>

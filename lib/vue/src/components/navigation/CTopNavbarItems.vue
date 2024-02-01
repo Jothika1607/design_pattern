@@ -168,13 +168,6 @@ export default {
       return children.map(c => this.showChildren(c)).some(isOpen => isOpen)
     },
   },
-
-  mounted() {
-    document.addEventListener('click', this.close());
-    console.log("sunnnnnnnnn",this.$route.name);
-
-  },
-
 }
 </script>
  
