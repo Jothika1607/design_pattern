@@ -90,7 +90,8 @@
 </b-dropdown>
 
       </template>
-      <template v-else>{{ page.title }}</template>
+      <template v-else>
+        <span>{{ page.title }}</span></template>
     </b-button>
   </div>
 </template>

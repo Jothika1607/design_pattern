@@ -26,7 +26,7 @@
       >
         <b-row
           no-gutters
-          class="d-flex align-items-center justify-content-between gap-1"
+          class="d-flex align-items-center justify-content-between gap-1 body-card"
         >
           <div class="d-flex align-items-center flex-grow-1 flex-wrap flex-fill-child gap-1">
             <template v-if="recordListModule.canCreateRecord">
@@ -56,7 +56,7 @@
                     size="lg"
                     @click="handleAddRecord()"
                   >
-                    + {{ $t('recordList.addRecord') }}
+                    Add new
                   </b-button>
 
                   <importer-modal
@@ -121,9 +121,20 @@
         </b-row>
 
         <b-row>
+          <!-- <div
+            v-if="!options.hideSearch"
+            class="flex-fill col-3 ml-auto d-flex justify-content-end search-body"
+          >
+            <c-input-search
+              v-model.trim="query"
+              :placeholder="$t('Search case here')"
+              :debounce="500"
+              class="search-r"
+            />
+          </div> -->
           <div
             v-if="!options.hideSearch"
-            class="flex-fill col-3 ml-auto d-flex justify-content-end"
+            class="ml-auto search-body"
           >
             <c-input-search
               v-model.trim="query"
@@ -253,7 +264,7 @@
                 <b-checkbox
                   :disabled="disableSelectAll"
                   :checked="areAllRowsSelected && !disableSelectAll"
-                  class="ml-1"
+                  class="checkbox-table"
                   @change="handleSelectAllOnPage({ isChecked: $event })"
                 />
               </b-th>
@@ -346,12 +357,12 @@
 
               <b-td
                 v-if="options.selectable"
-                class="pr-0 d-print-none"
+                class="d-print-none"
                 @click.stop
               >
                 <b-form-checkbox
-                  class="ml-1"
                   :checked="selected.includes(item.id)"
+                  class="checkbox-table"
                   @change="onSelectRow($event, item)"
                 />
               </b-td>
@@ -2075,6 +2086,12 @@ td:hover .inline-actions {
     color: var(--primary) !important;
   }
 }
+
+.checkbox-table{
+  width: 40px;
+  height: 40px;
+}
+
 </style>
 
 <style lang="scss">
@@ -2124,9 +2141,45 @@ td:hover .inline-actions {
     tr {
       th{
         background-color: #E7EFFD !important;
-
+        >div{
+          height: 37px;
+        div{
+          font-weight: 500 !important;
+        font-size: 16px !important;
+        }
+      }
       }
     }
   }
 }
+
+td{
+  >div{
+    margin-top: 10px;
+    div{
+      p{
+        font-size: 16px;
+        font-weight: 400;
+      }
+      span a{
+        font-size: 16px;
+        font-weight: 400;
+      }
+      div{
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+.search-body{
+  padding: 24px 16px 24px 16px;
+}
+
+.body-card{
+  padding-top: 24px;
+  padding-left: 16px;
+}
+
 </style>

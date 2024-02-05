@@ -428,16 +428,9 @@ a.nav-active{
   div button{
     color: #3D6ECF !important;
   }
-  a .icon-small{
-    width: 40px;
-    height: 40px;
-    transition: all 0.5s ease-in-out;
+  a .icon-grip{
     color: #3D6ECF !important;
 }
-}
-
-.icon-colour .icon-small{
-    transition: all 0.5s ease-in-out;
 }
 
  .button-style{
@@ -449,6 +442,7 @@ a.nav-active{
   align-items: center;
   display: flex;
   border-radius: 8px !important;
+  white-space: nowrap;
  }
 
 .search-r{
@@ -474,3 +468,29 @@ a.nav-active{
   font-size: 16px !important;
 }
 
+.dropdown-toggle::after{
+  margin-left: 16px;
+}
+
+button.carat-test{
+  color: #373737 ;
+}
+
+button.carat-test:hover{
+  color: #373737 ;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 4px !important;
+  width: 40px;
+  height: 40px;
+}
+
+.custom-control-label::after {
+  width: 40px;
+  height: 40px;
+}
+
+.card{
+   border-radius: 8px !important;
+}
