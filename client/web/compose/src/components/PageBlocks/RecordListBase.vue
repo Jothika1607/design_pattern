@@ -29,7 +29,12 @@
           class="d-flex align-items-center justify-content-between gap-1 body-card"
         >
           <div class="d-flex align-items-center flex-grow-1 flex-wrap flex-fill-child gap-1">
-            <template v-if="recordListModule.canCreateRecord">
+            <h5 class="title-style">
+              {{ block.title }}
+            </h5>
+
+            <div class="d-flex ml-auto button-space">
+              <!-- <template v-if="recordListModule.canCreateRecord">
               <template v-if="inlineEditing">
                 <b-button
                   v-if="!options.hideAddButton"
@@ -43,42 +48,64 @@
               </template>
 
               <template v-else-if="!inlineEditing && (recordPageID || options.allRecords)">
-                <!-- <font-awesome-icon :icon="['fas', 'folder']" /> -->
-                <h5 class="title-style">
-                  {{ block.title }}
-                </h5>
-                <div class="d-flex ml-auto button-space">
-                  <b-button
-                    v-if="!options.hideAddButton"
-                    data-test-id="button-add-record"
-                    variant=""
-                    class="button-style"
-                    size="lg"
-                    @click="handleAddRecord()"
-                  >
-                    Add new
-                  </b-button>
-
+                <div class="d-flex button-space ">
                   <importer-modal
                     v-if="!options.hideImportButton"
                     :module="recordListModule"
                     :namespace="namespace"
                     @importSuccessful="onImportSuccessful"
                   />
-
-                  <exporter-modal
-                    v-if="options.allowExport && !inlineEditing"
-                    :module="recordListModule"
-                    :filter="filter.query"
-                    :selection="selected"
-                    :selected-all-records="selectedAllRecords"
-                    :processing="processing"
-                    :preselected-fields="fields.map(({ moduleField }) => moduleField)"
-                    @export="onExport"
-                  />
                 </div>
               </template>
-            </template>
+            </template> -->
+
+              <b-button
+                v-if="!options.hideAddButton && !inlineEditing"
+                data-test-id="button-add-record"
+                variant=""
+                class="button-style ml-auto"
+                size="lg"
+                @click="handleAddRecord()"
+              >
+                Add new
+              </b-button>
+
+              <template v-if="recordListModule.canCreateRecord">
+                <template v-if="inlineEditing">
+                  <b-button
+                    v-if="!options.hideAddButton"
+                    data-test-id="button-add-record"
+                    variant="primary"
+                    size="lg"
+                    @click="addInlineRecord()"
+                  >
+                    + {{ $t('recordList.addRecord') }}
+                  </b-button>
+                </template>
+
+                <template v-else-if="!inlineEditing && (recordPageID || options.allRecords)">
+                  <div class="d-flex button-space ">
+                    <importer-modal
+                      v-if="!options.hideImportButton"
+                      :module="recordListModule"
+                      :namespace="namespace"
+                      @importSuccessful="onImportSuccessful"
+                    />
+                  </div>
+                </template>
+              </template>
+
+              <exporter-modal
+                v-if="options.allowExport && !inlineEditing"
+                :module="recordListModule"
+                :filter="filter.query"
+                :selection="selected"
+                :selected-all-records="selectedAllRecords"
+                :processing="processing"
+                :preselected-fields="fields.map(({ moduleField }) => moduleField)"
+                @export="onExport"
+              />
+            </div>
 
             <b-dropdown
               v-if="filterPresets.length"
@@ -2142,7 +2169,7 @@ td:hover .inline-actions {
       th{
         background-color: #E7EFFD !important;
         >div{
-          height: 37px;
+          line-height: 37px !important;
         div{
           font-weight: 500 !important;
         font-size: 16px !important;
@@ -2154,17 +2181,20 @@ td:hover .inline-actions {
 }
 
 td{
-  >div{
-    margin-top: 10px;
+  line-height: 37px !important;
+  div{
     div{
       p{
         font-size: 16px;
         font-weight: 400;
       }
-      span a{
+      span {
+        line-height: 1.9 !important;
+        a{
         font-size: 16px;
         font-weight: 400;
       }
+    }
       div{
         font-size: 16px;
         font-weight: 400;
@@ -2180,6 +2210,10 @@ td{
 .body-card{
   padding-top: 24px;
   padding-left: 16px;
+}
+
+.button-space{
+  gap:8px;
 }
 
 </style>

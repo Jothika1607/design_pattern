@@ -484,13 +484,32 @@ button.carat-test:hover{
   border-radius: 4px !important;
   width: 40px;
   height: 40px;
+  top: 0px !important;
 }
 
 .custom-control-label::after {
   width: 40px;
   height: 40px;
+  top: 0px !important;
 }
 
 .card{
    border-radius: 8px !important;
+}
+
+tbody{
+  tr{
+    td{
+      div{
+        div{
+          white-space: nowrap;
+          div.rt-content{
+            p{
+            white-space: nowrap !important;
+            }
+          }
+        }
+      }
+    }
+  }
 }
