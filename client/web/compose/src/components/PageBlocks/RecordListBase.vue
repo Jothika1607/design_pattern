@@ -6,85 +6,57 @@
     v-on="$listeners"
     @refreshBlock="refresh(true, false)"
   >
-    <template
-      v-if="isFederated"
-      #title-badge
-    >
-      <b-badge
-        variant="primary"
-        class="d-inline-block mb-0 ml-2"
-      >
-        {{ $t('recordList.federated') }}
+    <template v-if="isFederated" #title-badge>
+      <b-badge variant="primary" class="d-inline-block mb-0 ml-2">
+        {{ $t("recordList.federated") }}
       </b-badge>
     </template>
 
     <template #toolbar>
-      <b-container
-        ref="toolbar"
-        fluid
-        class="d-flex flex-column gap-1 py-2 d-print-none"
-      >
+      <b-container ref="toolbar" fluid class="d-flex flex-column gap-1 d-print-none">
         <b-row
           no-gutters
           class="d-flex align-items-center justify-content-between gap-1 body-card"
         >
-          <div class="d-flex align-items-center flex-grow-1 flex-wrap flex-fill-child gap-1">
-            <h5 class="title-style">
+          <div
+            class="d-flex align-items-center flex-grow-1 flex-wrap flex-fill-child gap-1"
+          >
+            <!-- <h5 class="title-style">
               {{ block.title }}
-            </h5>
+            </h5> -->
 
-            <div class="d-flex ml-auto button-space">
-              <!-- <template v-if="recordListModule.canCreateRecord">
-              <template v-if="inlineEditing">
-                <b-button
-                  v-if="!options.hideAddButton"
-                  data-test-id="button-add-record"
-                  variant="primary"
-                  size="lg"
-                  @click="addInlineRecord()"
-                >
-                  + {{ $t('recordList.addRecord') }}
-                </b-button>
-              </template>
-
-              <template v-else-if="!inlineEditing && (recordPageID || options.allRecords)">
-                <div class="d-flex button-space ">
-                  <importer-modal
-                    v-if="!options.hideImportButton"
-                    :module="recordListModule"
-                    :namespace="namespace"
-                    @importSuccessful="onImportSuccessful"
-                  />
-                </div>
-              </template>
-            </template> -->
-
+            <div class="d-flex button-space">
               <b-button
                 v-if="!options.hideAddButton && !inlineEditing"
                 data-test-id="button-add-record"
-                variant=""
-                class="button-style ml-auto"
+                variant="none"
+                class="ml-auto"
                 size="lg"
                 @click="handleAddRecord()"
               >
+                <font-awesome-icon :icon="['fas', 'plus']" />
                 Add new
               </b-button>
+
+              <div class="vertical-line my-2"></div>
 
               <template v-if="recordListModule.canCreateRecord">
                 <template v-if="inlineEditing">
                   <b-button
                     v-if="!options.hideAddButton"
                     data-test-id="button-add-record"
-                    variant="primary"
+                    variant="none"
                     size="lg"
                     @click="addInlineRecord()"
                   >
-                    + {{ $t('recordList.addRecord') }}
+                    + {{ $t("recordList.addRecord") }}
                   </b-button>
                 </template>
 
-                <template v-else-if="!inlineEditing && (recordPageID || options.allRecords)">
-                  <div class="d-flex button-space ">
+                <template
+                  v-else-if="!inlineEditing && (recordPageID || options.allRecords)"
+                >
+                  <div class="d-flex button-space">
                     <importer-modal
                       v-if="!options.hideImportButton"
                       :module="recordListModule"
@@ -146,45 +118,22 @@
             />
           </div>
         </b-row>
-
-        <b-row>
-          <!-- <div
-            v-if="!options.hideSearch"
-            class="flex-fill col-3 ml-auto d-flex justify-content-end search-body"
-          >
-            <c-input-search
-              v-model.trim="query"
-              :placeholder="$t('Search case here')"
-              :debounce="500"
-              class="search-r"
-            />
-          </div> -->
-          <div
-            v-if="!options.hideSearch"
-            class="ml-auto search-body"
-          >
-            <c-input-search
-              v-model.trim="query"
-              :placeholder="$t('Search case here')"
-              :debounce="500"
-              class="search-r"
-            />
-          </div>
-        </b-row>
-
+      </b-container>
+    </template>
+    <template #Filter>
+      <b-container ref="toolbar" fluid class="d-flex flex-column gap-1 d-print-none">
         <div
-          v-if="activeFilters.length || drillDownFilter || options.showDeletedRecordsOption"
+          v-if="
+            activeFilters.length || drillDownFilter || options.showDeletedRecordsOption
+          "
           class="d-flex"
         >
-          <div
-            v-if="activeFilters.length"
-            class="d-flex align-items-center flex-wrap"
-          >
-            {{ $t('recordList.filter.filters.active') }}
+          <div v-if="activeFilters.length" class="d-flex align-items-center flex-wrap">
+            {{ $t("recordList.filter.filters.active") }}
             <b-form-tags
               size="lg"
               class="d-flex align-items-center border-0 p-0 bg-transparent"
-              style="width: fit-content;"
+              style="width: fit-content"
             >
               <b-form-tag
                 v-for="(title, i) in activeFilters"
@@ -205,7 +154,11 @@
             class="text-primary border-0 text-nowrap ml-auto"
             @click="handleShowDeleted()"
           >
-            {{ showingDeletedRecords ? $t('recordList.showRecords.existing') : $t('recordList.showRecords.deleted') }}
+            {{
+              showingDeletedRecords
+                ? $t("recordList.showRecords.existing")
+                : $t("recordList.showRecords.deleted")
+            }}
           </b-button>
         </div>
 
@@ -224,7 +177,11 @@
             class="text-primary border-0"
             @click="selectAllRecords()"
           >
-            {{ selectedAllRecords ? $t('recordList.unselectAllRecords') : $t('recordList.selectAllRecords') }}
+            {{
+              selectedAllRecords
+                ? $t("recordList.unselectAllRecords")
+                : $t("recordList.selectAllRecords")
+            }}
           </b-button>
 
           <div class="d-flex align-items-center ml-auto gap-1">
@@ -232,13 +189,17 @@
               class="d-inline m-0 mr-2"
               :buttons="options.selectionButtons"
               :module="recordListModule"
-              :extra-event-args="{ selected, filter}"
+              :extra-event-args="{ selected, filter }"
               v-bind="$props"
               @refresh="refresh()"
             />
 
             <bulk-edit-modal
-              v-show="options.bulkRecordEditEnabled && canUpdateSelectedRecords && !showingDeletedRecords"
+              v-show="
+                options.bulkRecordEditEnabled &&
+                canUpdateSelectedRecords &&
+                !showingDeletedRecords
+              "
               :module="recordListModule"
               :namespace="namespace"
               :query="bulkQuery"
@@ -266,7 +227,27 @@
         </div>
       </b-container>
     </template>
-
+    <template #searchcase>
+      <!-- <div
+        v-if="!options.hideSearch"
+        class="flex-fill col-3 ml-auto d-flex justify-content-end search-body"
+      >
+        <c-input-search
+          v-model.trim="query"
+          :placeholder="$t('Search case here')"
+          :debounce="500"
+          class="search-r"
+        />
+      </div> -->
+      <div v-if="!options.hideSearch" class="search-body">
+        <c-input-search
+          v-model.trim="query"
+          :placeholder="$t('Search case here')"
+          :debounce="500"
+          class="search-r"
+        />
+      </div>
+    </template>
     <template #default>
       <div
         class="d-flex position-relative h-100"
@@ -283,11 +264,7 @@
             <b-tr :variant="showingDeletedRecords ? 'warning' : ''">
               <b-th v-if="options.draggable && inlineEditing" />
 
-              <b-th
-                v-if="options.selectable"
-                style="width: 0%;"
-                class="d-print-none"
-              >
+              <b-th v-if="options.selectable" style="width: 0%" class="d-print-none">
                 <b-checkbox
                   :disabled="disableSelectAll"
                   :checked="areAllRowsSelected && !disableSelectAll"
@@ -302,9 +279,9 @@
                 v-for="(field, fieldIndex) in fields"
                 :key="field.key"
                 sticky-column
-                :colspan="fieldIndex === (fields.length - 1) ? 2 : 1"
+                :colspan="fieldIndex === fields.length - 1 ? 2 : 1"
                 :style="{
-                  'padding-right': fieldIndex === (fields.length - 1) ? '15px' : '',
+                  'padding-right': fieldIndex === fields.length - 1 ? '15px' : '',
                 }"
               >
                 <div class="d-flex align-items-center">
@@ -317,14 +294,15 @@
 
                   <b-button
                     v-if="field.sortable"
-                    v-b-tooltip.hover="{ title: $t('recordList.sort.tooltip'), container: '#body' }"
+                    v-b-tooltip.hover="{
+                      title: $t('recordList.sort.tooltip'),
+                      container: '#body',
+                    }"
                     variant="outline-light"
                     class="d-flex align-items-center text-secondary d-print-none border-0 px-1 ml-1"
                     @click="handleSort(field)"
                   >
-                    <font-awesome-layers
-                      class="d-print-none"
-                    >
+                    <font-awesome-layers class="d-print-none">
                       <font-awesome-icon
                         :icon="['fas', 'angle-up']"
                         class="mb-1 text-grey"
@@ -366,27 +344,22 @@
             <b-tr
               v-for="(item, index) in items"
               :key="`${index}${item.r.recordID}`"
-              :class="{ 'pointer': !(options.editable && editing), }"
+              :class="{ pointer: !(options.editable && editing) }"
               :variant="inlineEditing && item.r.deletedAt ? 'warning' : ''"
               @click="handleRowClicked(item)"
             >
-              <b-td
-                v-if="options.draggable && inlineEditing"
-                class="pr-0"
-                @click.stop
-              >
+              <b-td v-if="options.draggable && inlineEditing" class="pr-0" @click.stop>
                 <font-awesome-icon
-                  v-b-tooltip.hover="{ title: $t('general.tooltip.dragAndDrop'), container: '#body' }"
+                  v-b-tooltip.hover="{
+                    title: $t('general.tooltip.dragAndDrop'),
+                    container: '#body',
+                  }"
                   :icon="['fas', 'bars']"
                   class="handle text-light my-1"
                 />
               </b-td>
 
-              <b-td
-                v-if="options.selectable"
-                class="d-print-none"
-                @click.stop
-              >
+              <b-td v-if="options.selectable" class="d-print-none" @click.stop>
                 <b-form-checkbox
                   :checked="selected.includes(item.id)"
                   class="checkbox-table"
@@ -394,10 +367,7 @@
                 />
               </b-td>
 
-              <b-td
-                v-if="isFederated"
-                class="align-middle pl-0"
-              >
+              <b-td v-if="isFederated" class="align-middle pl-0">
                 <b-badge
                   v-if="Object.keys(item.r.labels || {}).includes('federation')"
                   variant="primary"
@@ -407,10 +377,7 @@
                 </b-badge>
               </b-td>
 
-              <b-td
-                v-for="field in fields"
-                :key="field.key"
-              >
+              <b-td v-for="field in fields" :key="field.key">
                 <field-editor
                   v-if="field.moduleField.canUpdateRecordValue && field.editable"
                   :field="field.moduleField"
@@ -420,7 +387,7 @@
                   :namespace="namespace"
                   :errors="recordErrors(item, field)"
                   class="mb-0"
-                  style="min-width: 150px;"
+                  style="min-width: 150px"
                   @click.stop
                 />
 
@@ -440,35 +407,34 @@
                     :extra-options="options"
                   />
                   <div
-                    v-if="options.inlineRecordEditEnabled && field.canEdit && !showingDeletedRecords"
+                    v-if="
+                      options.inlineRecordEditEnabled &&
+                      field.canEdit &&
+                      !showingDeletedRecords
+                    "
                     class="inline-actions"
                   >
                     <b-button
-                      v-b-tooltip.hover="{ title: $t('recordList.inlineEdit.button.title'), container: '#body' }"
+                      v-b-tooltip.hover="{
+                        title: $t('recordList.inlineEdit.button.title'),
+                        container: '#body',
+                      }"
                       variant="outline-light"
                       size="sm"
                       class="text-secondary border-0 ml-1"
                       @click.stop="editInlineField(item.r, field.key)"
                     >
-                      <font-awesome-icon
-                        :icon="['fas', 'pen']"
-                      />
+                      <font-awesome-icon :icon="['fas', 'pen']" />
                     </b-button>
                   </div>
                 </div>
 
-                <i
-                  v-else
-                  class="text-primary"
-                >
-                  {{ $t('field.noPermission') }}
+                <i v-else class="text-primary">
+                  {{ $t("field.noPermission") }}
                 </i>
               </b-td>
 
-              <b-td
-                class="actions px-2"
-                @click.stop
-              >
+              <b-td class="actions px-2" @click.stop>
                 <b-dropdown
                   v-if="areActionsVisible(item.r)"
                   boundary="viewport"
@@ -479,20 +445,15 @@
                   menu-class="m-0"
                 >
                   <template #button-content>
-                    <font-awesome-icon
-                      :icon="['fas', 'ellipsis-v']"
-                    />
+                    <font-awesome-icon :icon="['fas', 'ellipsis-v']" />
                   </template>
                   <template v-if="inlineEditing">
                     <b-dropdown-item
                       v-if="isCloneRecordActionVisible"
                       @click="handleCloneInline(item.r)"
                     >
-                      <font-awesome-icon
-                        :icon="['far', 'clone']"
-                        class="text-primary"
-                      />
-                      {{ $t('recordList.record.tooltip.clone') }}
+                      <font-awesome-icon :icon="['far', 'clone']" class="text-primary" />
+                      {{ $t("recordList.record.tooltip.clone") }}
                     </b-dropdown-item>
 
                     <b-dropdown-item
@@ -503,68 +464,60 @@
                         :icon="['fa', 'trash-restore']"
                         class="text-warning"
                       />
-                      {{ $t('recordList.record.tooltip.restore') }}
+                      {{ $t("recordList.record.tooltip.restore") }}
                     </b-dropdown-item>
 
                     <!-- The user should be able to delete the record if it's not yet saved -->
                     <b-dropdown-item
                       v-else-if="isInlineDeleteActionVisible(item.r)"
-
                       @click.prevent="handleDeleteInline(item, index)"
                     >
                       <font-awesome-icon
                         :icon="['far', 'trash-alt']"
                         class="text-danger"
                       />
-                      {{ $t('recordList.record.tooltip.delete') }}
+                      {{ $t("recordList.record.tooltip.delete") }}
                     </b-dropdown-item>
                   </template>
 
-                  <template
-                    v-else
-                  >
+                  <template v-else>
                     <b-dropdown-item
                       v-if="isViewRecordActionVisible(item.r)"
-                      :to="{ name: options.rowViewUrl || 'page.record', params: { pageID: recordPageID, recordID: item.r.recordID }, query: null }"
+                      :to="{
+                        name: options.rowViewUrl || 'page.record',
+                        params: { pageID: recordPageID, recordID: item.r.recordID },
+                        query: null,
+                      }"
                     >
                       <font-awesome-icon
                         :icon="['far', 'file-alt']"
                         class="text-primary"
                       />
-                      {{ $t('recordList.record.tooltip.view') }}
+                      {{ $t("recordList.record.tooltip.view") }}
                     </b-dropdown-item>
 
                     <b-dropdown-item
                       v-if="isEditRecordActionVisible(item.r)"
                       @click="handleEditRecordAction(item.r.recordID)"
                     >
-                      <font-awesome-icon
-                        :icon="['far', 'edit']"
-                        class="text-primary"
-                      />
-                      {{ $t('recordList.record.tooltip.edit') }}
+                      <font-awesome-icon :icon="['far', 'edit']" class="text-primary" />
+                      {{ $t("recordList.record.tooltip.edit") }}
                     </b-dropdown-item>
 
                     <b-dropdown-item
                       v-if="isCloneRecordActionVisible"
                       @click="handleCloneRecordAction(item.r.recordID, item.r.values)"
                     >
-                      <font-awesome-icon
-                        :icon="['far', 'clone']"
-                        class="text-primary"
-                      />
-                      {{ $t('recordList.record.tooltip.clone') }}
+                      <font-awesome-icon :icon="['far', 'clone']" class="text-primary" />
+                      {{ $t("recordList.record.tooltip.clone") }}
                     </b-dropdown-item>
 
                     <b-dropdown-item
                       v-if="isReminderActionVisible"
                       @click.prevent="createReminder(item.r)"
                     >
-                      <font-awesome-icon
-                        :icon="['far', 'bell']"
-                        class="text-primary"
-                      />
-                      {{ $t('recordList.record.tooltip.reminder') }}
+                      <font-awesome-icon :icon="['far', 'bell']" class="text-primary" />
+                      {{ $t("recordList.record.tooltip.reminder") }}
                     </b-dropdown-item>
 
                     <b-dropdown-item
@@ -615,17 +568,12 @@
           <div
             v-else
             class="position-absolute text-center mt-5 d-print-none"
-            style="left: 0; right: 0;"
+            style="left: 0; right: 0"
           >
-            <b-spinner
-              v-if="processing"
-            />
+            <b-spinner v-if="processing" />
 
-            <p
-              v-else-if="!items.length"
-              class="mb-0 mx-2"
-            >
-              {{ $t('recordList.noRecords') }}
+            <p v-else-if="!items.length" class="mb-0 mx-2">
+              {{ $t("recordList.noRecords") }}
             </p>
           </div>
         </b-table-simple>
@@ -656,25 +604,19 @@
     <template #footer>
       <div
         v-if="showFooter"
-        class="d-flex align-items-center flex-wrap justify-content-between p-2"
+        class="d-flex align-items-center flex-wrap justify-content-between p-2 card-bottom"
       >
         <div class="d-flex gap-col-3 align-items-center flex-wrap">
-          <div
-            v-if="options.showTotalCount"
-            class="ml-2 text-nowrap my-1 text-truncate"
-          >
+          <div v-if="options.showTotalCount" class="ml-2 text-nowrap my-1 text-truncate">
             <span
               v-if="pagination.count > recordsPerPage"
               data-test-id="pagination-range"
             >
-              {{ $t('recordList.pagination.showing', getPagination) }}
+              {{ $t("recordList.pagination.showing", getPagination) }}
             </span>
 
-            <span
-              v-else
-              data-test-id="pagination-single-number"
-            >
-              {{ $t('recordList.pagination.single', getPagination) }}
+            <span v-else data-test-id="pagination-single-number">
+              {{ $t("recordList.pagination.single", getPagination) }}
             </span>
           </div>
 
@@ -683,7 +625,7 @@
             class="d-flex align-items-center ml-2 my-1 gap-1 text-nowrap"
           >
             <span>
-              {{ $t('recordList.pagination.recordsPerPage') }}
+              {{ $t("recordList.pagination.recordsPerPage") }}
             </span>
 
             <b-form-select
@@ -696,7 +638,7 @@
 
         <div
           v-if="showPageNavigation"
-          class="d-flex align-items-center justify-content-end "
+          class="d-flex align-items-center justify-content-end"
         >
           <b-pagination
             v-if="options.fullPageNavigation"
@@ -736,8 +678,8 @@
             <b-button
               :disabled="!hasPrevPage || processing"
               data-test-id="first-page"
-              variant="outline-light"
-              class="d-flex align-items-center justify-content-center text-primary border-0"
+              variant="none"
+              class="d-flex align-items-center justify-content-center pagination border-0"
               @click="goToPage()"
             >
               <font-awesome-icon :icon="['fas', 'angle-double-left']" />
@@ -746,29 +688,23 @@
             <b-button
               :disabled="!hasPrevPage || processing"
               data-test-id="previous-page"
-              variant="outline-light"
-              class="d-flex align-items-center justify-content-center text-primary border-0"
+              variant="nonet"
+              class="d-flex align-items-center justify-content-center pagination border-0"
               @click="goToPage('prevPage')"
             >
-              <font-awesome-icon
-                :icon="['fas', 'angle-left']"
-                class="mr-1"
-              />
-              {{ $t('recordList.pagination.prev') }}
+              <font-awesome-icon :icon="['fas', 'angle-left']" class="mr-1" />
+              {{ $t("recordList.pagination.prev") }}
             </b-button>
 
             <b-button
               :disabled="!hasNextPage || processing"
               data-test-id="next-page"
-              variant="outline-light"
-              class="d-flex align-items-center justify-content-center text-primary border-0"
+              variant="none"
+              class="d-flex align-items-center justify-content-center pagination border-0"
               @click="goToPage('nextPage')"
             >
-              {{ $t('recordList.pagination.next') }}
-              <font-awesome-icon
-                :icon="['fas', 'angle-right']"
-                class="ml-1"
-              />
+              {{ $t("recordList.pagination.next") }}
+              <font-awesome-icon :icon="['fas', 'angle-right']" class="ml-1" />
             </b-button>
           </b-button-group>
         </div>
@@ -904,7 +840,7 @@ export default {
 
     showFooter () {
       return this.showPageNavigation || this.options.showTotalCount || this.options.showRecordPerPageOption
-    },
+      },
 
     perPageOptions () {
       const defaultText = this.options.perPage === 0 ? this.$t('general:label.all') : this.options.perPage.toString()
@@ -914,10 +850,10 @@ export default {
         { text: '50', value: 50 },
         { text: '100', value: 100 },
       ].filter((v, i) => i === 0 || v.value !== this.options.perPage).sort((a, b) => {
-        if (a.value === 0) return 1
-        if (b.value === 0) return -1
-        return a.value - b.value
-      })
+          if (a.value === 0) return 1
+          if (b.value === 0) return -1
+          return a.value - b.value
+        })
     },
 
     getPagination () {
@@ -1005,8 +941,8 @@ export default {
       let fields = []
 
       const editable = (!this.options.editable || !this.editing)
-        ? []
-        : this.options.editFields.map(({ name }) => name)
+          ? []
+          : this.options.editFields.map(({ name }) => name)
 
       if (!this.options.hideConfigureFieldsButton && this.customConfiguredFields.length > 0) {
         fields = this.recordListModule.filterFields(this.customConfiguredFields)
@@ -1266,15 +1202,15 @@ export default {
       const sortedFields = (sort.includes(',') ? sort.split(',') : [sort])
 
       return sortedFields.map(v => v.trim()).some(value => {
-        let valueDir = 'ASC'
+          let valueDir = 'ASC'
 
-        if (value.includes(' ')) {
-          value = value.split(' ')[0]
-          valueDir = 'DESC'
-        }
+          if (value.includes(' ')) {
+            value = value.split(' ')[0]
+            valueDir = 'DESC'
+          }
 
-        return valueDir === dir && value === key
-      })
+          return valueDir === dir && value === key
+        })
     },
 
     handleShowDeleted () {
@@ -1764,7 +1700,11 @@ export default {
 
         // Check type of filter value
         if (!Array.isArray(currentFilters)) {
-          console.warn(this.$t('notification:record-list.incorrect-filter-structure', { filterID: this.uniqueID }))
+          console.warn(
+            this.$t("notification:record-list.incorrect-filter-structure", {
+              filterID: this.uniqueID,
+            })
+          );
           // Remove the filter from the local storage if the type doesn't match
           removeItem(`record-list-filters-${this.uniqueID}`)
         } else {
@@ -1859,11 +1799,11 @@ export default {
 
     isViewRecordActionVisible ({ canReadRecord }) {
       return !this.options.hideRecordViewButton && canReadRecord && (this.options.rowViewUrl || this.recordPageID)
-    },
+          },
 
     isEditRecordActionVisible ({ canUpdateRecord }) {
       return !this.options.hideRecordEditButton && canUpdateRecord && (this.options.rowEditUrl || this.recordPageID)
-    },
+          },
 
     isRecordPermissionButtonVisible ({ canGrant }) {
       return canGrant && !this.options.hideRecordPermissionsButton
@@ -2170,11 +2110,11 @@ td:hover .inline-actions {
         background-color: #E7EFFD !important;
         >div{
           line-height: 37px !important;
-        div{
-          font-weight: 500 !important;
-        font-size: 16px !important;
+          div{
+            font-weight: 500 !important;
+            font-size: 16px !important;
+          }
         }
-      }
       }
     }
   }
@@ -2191,10 +2131,10 @@ td{
       span {
         line-height: 1.9 !important;
         a{
-        font-size: 16px;
-        font-weight: 400;
+          font-size: 16px;
+          font-weight: 400;
+        }
       }
-    }
       div{
         font-size: 16px;
         font-weight: 400;
@@ -2203,17 +2143,13 @@ td{
   }
 }
 
-.search-body{
-  padding: 24px 16px 24px 16px;
+.button-space {
+  gap: 8px;
 }
-
-.body-card{
-  padding-top: 24px;
-  padding-left: 16px;
+.card-bottom {
+  background-color: #fbfbfb;
 }
-
-.button-space{
-  gap:8px;
+.buttoncard {
+  color: #3d6ecf;
 }
-
 </style>

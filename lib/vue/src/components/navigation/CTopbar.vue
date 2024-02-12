@@ -17,7 +17,7 @@
       width="78px"
       height="32px"
       src="
-      http://52.66.61.197:18080/assets/logo.png"/>
+      http://65.108.153.104:18080/assets/logo.png"/>
     </div>
 
     <div class="search-container">

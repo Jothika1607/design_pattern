@@ -3,9 +3,10 @@
     <b-button
       size="lg"
       variant="none"
-      class="flex-fill button-style"
+      class="flex-fill"
       @click="showModal=true"
     >
+      <font-awesome-icon :icon="['fas', 'file-import']" />
       {{ $t('general.label.import') }}
     </b-button>
 
