@@ -545,9 +545,15 @@ a.nav-active{
   color: #3D6ECF;
 }
 
-tbody{
+.sample{
+  width:848px;
+  height:160px;
+  color:#3D6ECF;
+}
+.record-list-table tbody{
   tr{
     td{
+      vertical-align: middle;
       div{
         div{
           white-space: nowrap;

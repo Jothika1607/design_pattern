@@ -2054,11 +2054,6 @@ td:hover .inline-actions {
   }
 }
 
-.checkbox-table{
-  width: 40px;
-  height: 40px;
-}
-
 </style>
 
 <style lang="scss">
@@ -2106,10 +2101,11 @@ td:hover .inline-actions {
 .record-list-table {
   thead {
     tr {
+      height:72px !important;
       th{
+        vertical-align: middle;
         background-color: #E7EFFD !important;
         >div{
-          line-height: 37px !important;
           div{
             font-weight: 500 !important;
             font-size: 16px !important;
@@ -2121,7 +2117,6 @@ td:hover .inline-actions {
 }
 
 td{
-  line-height: 37px !important;
   div{
     div{
       p{
