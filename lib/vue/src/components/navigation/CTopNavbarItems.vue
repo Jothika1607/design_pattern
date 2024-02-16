@@ -4,19 +4,20 @@
       v-for="({page = {}, params = {}, children = []}) of items"
       :key="pageIndex(page)"
       variant="link"
-      class="w-100 text-dark text-decoration-none p-0 pt-2 nav-item"
+      class="w-100 text-decoration-none p-0 nav-item d-flex"
       active-class="nav-active"
       exact-active-class="nav-active"
       :title="page.title"
       :to="{ name: page.name || defaultRouteName, params }"
     >
       <span
-        class="d-inline-block w-75 text-nowrap text-truncate"
+        class="d-inline-block text-nowrap text-truncate"
         @click="closeSidebar()"
       >
         <template
           v-if="page.icon"
         >
+        <!-- <font-awesome-icon :icon="['fas', 'users']" /> -->
           <font-awesome-icon
             v-if="Array.isArray(page.icon)"
             class="icon"
@@ -30,55 +31,75 @@
             />
           </template>
         </template>
-        <label
+        <!-- <label
           class="title mb-0 pointer"
         >
           {{ page.title }}
-        </label>
+        </label> -->
       </span>
-
+ 
       <template
         v-if="children.length"
       >
-        <b-button
-          variant="outline-light"
-          size="sm"
-          class="text-primary p-0 border-0 float-right mr-1"
-          @click.self.stop.prevent="toggle(page)"
-        >
-          <font-awesome-icon
-            v-if="!collapses[pageIndex(page)]"
-            class="pointer-none"
-            :icon="['fas', 'chevron-down']"
-          />
-          <font-awesome-icon
-            v-else
-            class="pointer-none"
-            :icon="['fas', 'chevron-up']"
-          />
-        </b-button>
+      <!-- <b-button
+      variant="None"
+      size="sm"
+      class="text-primary p-0 border-0 float-right mr-1 caret-button"
+      @click.self.stop.prevent="toggle(page)"
+    >
+      <font-awesome-icon
+        v-if="!collapses[pageIndex(page)]"
+        class="pointer-none"
+        :icon="['fas', 'caret-down']"
+      />
+      <font-awesome-icon
+        v-else
+        class="pointer-none"
+        :icon="['fas', 'caret-up']"
+      />
+    </b-button>
 
-        <b-collapse
-          :visible="collapses[pageIndex(page)]"
-          @click.stop.prevent
+    <b-collapse
+      class="position-absolute sub-nav-item"
+      :visible="collapses[pageIndex(page)]"
+      @click.stop.prevent
+      ref="dropdown"
+    >
+      <c-top-navbar-items
+        :items="children"
+        :start-expanded="startExpanded"
+        :default-route-name="defaultRouteName"
+        v-on="$listeners"
+      />
+    </b-collapse> -->
+                <b-dropdown 
+        :text="page.title"
+        variant="none"
+        class="nav-active"
         >
-          <c-sidebar-nav-items
-            class="ml-2"
-            :items="children"
-            :start-expanded="startExpanded"
-            :default-route-name="defaultRouteName"
-            v-on="$listeners"
-          />
-        </b-collapse>
+  <b-dropdown-item v-for="({page = {}, params = {},})  of children" :key="page.name" :to="{ name: page.name || defaultRouteName, params }">
+    
+    {{ page.title }}
+    <!-- <c-top-navbar-items
+      :items="children"
+      :start-expanded="startExpanded"
+      :default-route-name="defaultRouteName"
+      v-on="$listeners"
+    /> -->
+</b-dropdown-item>
+</b-dropdown>
+
       </template>
+      <template v-else>
+        <span>{{ page.title }}</span></template>
     </b-button>
   </div>
 </template>
-
+ 
 <script>
 export default {
-  name: 'CSidebarNavItems',
-
+  name: 'CTopNavbarItems',
+ 
   props: {
     /*
     * {
@@ -100,13 +121,13 @@ export default {
       required: false,
     },
   },
-
+ 
   data () {
     return {
       collapses: {},
     }
   },
-
+ 
   watch: {
     items: {
       immediate: true,
@@ -119,78 +140,91 @@ export default {
       },
     },
   },
-
+ 
   methods: {
     closeSidebar () {
       if (window.innerWidth < 576) {
         this.$root.$emit('close-sidebar')
       }
     },
-
-    pageIndex (p) {
-      return p.pageID || p.name || p.title
+ 
+    toggle(p) {
+      const px = this.pageIndex(p);
+      this.$set(this.collapses, px, !this.collapses[px]);
     },
-
-    toggle (p) {
-      const px = this.pageIndex(p)
-      this.$set(this.collapses, px, !this.collapses[px])
+    pageIndex(p) {
+      return p.pageID || p.name || p.title;
     },
-
+ 
     // Recursively check for child pages that are open, so that parents can open as well
     showChildren ({ params = {}, children = [] }) {
       const partialParamsMatch = Object.entries(params).some(([key, value]) => {
         return this.$route.params[key] === value
       })
-
+ 
       if (partialParamsMatch) {
         return partialParamsMatch
       }
-
+ 
       return children.map(c => this.showChildren(c)).some(isOpen => isOpen)
     },
   },
 }
 </script>
-
+ 
 <style scoped lang="scss">
 // This has to be there, so chevrons are clickable inside the button
 .pointer-none {
   pointer-events: none;
 }
-
+.caret-button{
+  width:40px;
+  height: 40px;
+  margin-left: 8px;
+}
+ 
 .svg-inline--fa {
   width: 30px;
 }
-
-.nav-item > span {
-  .title {
-    color: var(--tertiary);
+ 
+.sub-nav-item{
+    background: white;
+    border: 1px solid white;
+  .nav-active{
+    border-bottom-color: white !important;
   }
 }
 
+ 
+.nav-item > span {
+  button {
+    color: var(--tertiary);
+  }
+}
+ 
 .nav-item:hover > span {
   .title {
     color: var(--primary);
     transition: color 0.25s;
   }
 }
-
+ 
 .nav-active > span > {
   .icon {
     color: var(--primary)
   }
-
-  .title {
+ 
+  .btn {
     font-family: 'Roboto-Regular';
     color: var(--primary);
     transition: color 0.5s
   }
 }
-
+ 
 .nav-item {
   text-align: left;
 }
-
+ 
 [dir="rtl"] {
   .nav-item {
     text-align: right;

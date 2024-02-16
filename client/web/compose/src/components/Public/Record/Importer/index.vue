@@ -2,10 +2,11 @@
   <div class="d-flex">
     <b-button
       size="lg"
-      variant="light"
+      variant="none"
       class="flex-fill"
       @click="showModal=true"
     >
+      <font-awesome-icon :icon="['fas', 'file-import']" />
       {{ $t('general.label.import') }}
     </b-button>
 

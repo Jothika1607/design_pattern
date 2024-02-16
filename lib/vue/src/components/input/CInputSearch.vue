@@ -146,7 +146,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .input-group-border {
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
 }
 
