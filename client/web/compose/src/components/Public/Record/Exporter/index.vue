@@ -1,11 +1,13 @@
 <template>
   <div class="d-flex">
+    <div class="vertical-line my-2" />
     <b-button
       size="lg"
-      variant="light"
+      variant="none"
       class="flex-fill"
       @click="toggleModal"
     >
+      <font-awesome-icon :icon="['fas', 'file-export']" />
       {{ $t('general:label.export') }}
     </b-button>
 

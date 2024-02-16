@@ -42,6 +42,7 @@ export {
   CTopbar,
   CSidebar,
   CSidebarNavItems,
+  CTopNavbarItems,
 } from './navigation'
 
 export {

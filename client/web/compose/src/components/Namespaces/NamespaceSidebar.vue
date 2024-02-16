@@ -66,7 +66,7 @@
             {{ $t('publicPages') }}
           </b-button>
 
-          <b-button
+          <!-- <b-button
             v-else-if="namespace.canManageNamespace"
             data-test-id="button-admin"
             variant="light"
@@ -74,24 +74,24 @@
             :to="{ name: 'admin.modules', params: { slug: namespace.slug || namespace.namespaceID } }"
           >
             {{ $t('adminPanel') }}
-          </b-button>
+          </b-button> -->
 
-          <c-input-search
+          <!-- <c-input-search
             v-model.trim="query"
             :disabled="loading"
             :placeholder="$t(`searchPlaceholder.${isAdminPage ? 'admin' : 'public'}`)"
             :autocomplete="'off'"
-          />
+          /> -->
         </div>
 
         <div
           v-if="!loading"
         >
-          <c-sidebar-nav-items
+          <c-top-navbar-items
             :items="navItems"
             :start-expanded="!!query"
             default-route-name="page"
-            class="overflow-auto h-100"
+            class="h-100"
           />
 
           <div
@@ -110,6 +110,13 @@
         </div>
       </div>
     </portal>
+    <portal to="nav-bar">
+      <c-top-navbar-items
+        :items="navItems"
+        default-route-name="page"
+        class="h-100"
+      />
+    </portal>
   </div>
 </template>
 
@@ -118,7 +125,7 @@ import { mapGetters } from 'vuex'
 import { NoID } from '@cortezaproject/corteza-js'
 import { components, filter } from '@cortezaproject/corteza-vue'
 import { Portal } from 'portal-vue'
-const { CSidebarNavItems, CInputSearch } = components
+const { CTopNavbarItems } = components
 
 const moduleWrap = (module, pageName) => {
   return {
@@ -161,8 +168,7 @@ export default {
 
   components: {
     Portal,
-    CSidebarNavItems,
-    CInputSearch,
+    CTopNavbarItems,
   },
 
   props: {
