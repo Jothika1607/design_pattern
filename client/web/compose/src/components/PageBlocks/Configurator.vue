@@ -54,6 +54,22 @@
           cols="12"
         >
           <b-form-group
+            label="DOM Id"
+            label-class="text-primary"
+          >
+            <b-input-group>
+              <b-form-input
+                id="dom_id"
+                v-model="block.domId"
+                placeholder="Enter DOM Id"
+              />
+            </b-input-group>
+          </b-form-group>
+        </b-col>
+        <b-col
+          cols="12"
+        >
+          <b-form-group
             :label="$t('general.descriptionLabel')"
             label-class="text-primary"
           >

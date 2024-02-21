@@ -546,8 +546,8 @@ a.nav-active{
 }
 
 .sample{
-  width:848px;
-  height:160px;
+  // width:848px !important;
+  // height:169px !important;
   color:#3D6ECF;
 }
 .record-list-table tbody{
@@ -567,3 +567,15 @@ a.nav-active{
     }
   }
 }
+
+// .card-header{
+//   color: red !important;
+// }
+
+// .card-body div{
+//   display: flex !important;
+// }
+
+// .card{
+//   width: 848px !important;
+// }

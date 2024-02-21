@@ -13,8 +13,8 @@ module.exports = ({ appFlavour, appLabel, version = process.env.BUILD_VERSION, t
   }
 
   if (isDevelopment) {
-    Vue.config.devtools = true
-    Vue.config.performance = true
+  Vue.config.devtools = true
+  Vue.config.performance = true
   }
 
   const optimization = isTest ? {} : {
@@ -37,6 +37,7 @@ module.exports = ({ appFlavour, appLabel, version = process.env.BUILD_VERSION, t
     runtimeCompiler: true,
 
     configureWebpack: {
+      devtool: 'source-map',
       // other webpack options to merge in ...
 
       // Make sure webpack is not too nosy
@@ -119,7 +120,6 @@ module.exports = ({ appFlavour, appLabel, version = process.env.BUILD_VERSION, t
       host: '127.0.0.1',
       hot: true,
       disableHostCheck: true,
-
       proxy: {
         '^/custom.css': {
           target: fetchBaseUrl(),

@@ -701,7 +701,7 @@ export default {
     // When debugging this, make sure to remove the @hide event handle from the block editor/creator modals
     updateBlocks (block = this.editor.block) {
       block = compose.PageBlockMaker(block)
-
+      block.domId = this.editor.block.domId
       const creatingTabbedBlock = this.editor.block.kind !== block.kind
 
       if (creatingTabbedBlock) {
@@ -885,7 +885,7 @@ export default {
                 blockID = (page.blocks.find(block => block.meta.tempID === meta.tempID) || {}).blockID
               }
 
-              return { blockID, xywh, meta }
+              return { blockID, xywh, meta, domId: '' }
             })
             layout = await this.updatePageLayout({ ...layout, blocks })
             return { page, layout }
@@ -1095,6 +1095,7 @@ export default {
         if (block) {
           block.xywh = xywh
           block.meta.hidden = !!meta.hidden
+          block.domId = ''
           tempBlocks.push(block)
 
           if (block.kind === 'Tabs') {
