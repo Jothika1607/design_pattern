@@ -701,7 +701,7 @@ export default {
     // When debugging this, make sure to remove the @hide event handle from the block editor/creator modals
     updateBlocks (block = this.editor.block) {
       block = compose.PageBlockMaker(block)
-
+      console.log('texttt', block)
       const creatingTabbedBlock = this.editor.block.kind !== block.kind
 
       if (creatingTabbedBlock) {

@@ -15,10 +15,15 @@ interface PageBlockStyleBorder {
   enabled?: boolean;
 }
 
+interface PageBlockStyleDisplay {
+  enabled?: boolean;
+}
+
 interface PageBlockStyle {
   variants: PageBlockStyleVariants;
   wrap?: PageBlockStyleWrap;
   border?: PageBlockStyleBorder;
+  display?: PageBlockStyleDisplay;
 }
 
 interface PageBlockMeta {
@@ -37,9 +42,9 @@ export class PageBlock {
 
   public title = '';
   public description = '';
+  public panelclass='';
 
   public xywh: number[] = defaultXYWH
-
 
   public options = {}
 
@@ -58,6 +63,9 @@ export class PageBlock {
     border: {
       enabled: false,
     },
+    display: {
+      enabled: false,
+    },
   }
 
   constructor (i?: PageBlockInput) {
@@ -68,7 +76,7 @@ export class PageBlock {
   apply (i?: PageBlockInput): void {
     if (!i) return
 
-    Apply(this, i, String, 'title', 'description', 'blockID')
+    Apply(this, i, String, 'title', 'description', 'blockID', 'panelclass')
 
     if (i.xywh) {
       if (!Array.isArray(i.xywh)) {

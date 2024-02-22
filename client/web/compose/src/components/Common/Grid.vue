@@ -35,7 +35,7 @@
           :y="item.y"
           :min-w="6"
           :min-h="5"
-          :class="{ 'h-100': isStretchable, 'sample' : !blocks[item.i].meta.hidden}"
+          :class="{ 'h-100': isStretchable, 'sample' : blocks[item.i].domid == 'CaseDetailB1'}"
           class="grid-item"
           style="touch-action: none;"
           @move="onGridAction"

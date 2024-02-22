@@ -13,7 +13,10 @@
       >
         <div v-if="!headerSet">
           <div class="d-flex justify-content-between">
-            <h5 v-if="blockTitle" class="text-truncate mb-0 headtitle">
+            <h5
+              v-if="blockTitle"
+              class="text-truncate mb-0 headtitle"
+            >
               {{ blockTitle }}
 
               <slot name="title-badge" />
@@ -23,7 +26,10 @@
             </div>
           </div>
           <div class="d-flex justify-content-between">
-            <b-button-group v-if="showOptions" class="shortcut-icon">
+            <b-button-group
+              v-if="showOptions"
+              class="shortcut-icon"
+            >
               <b-button
                 v-if="block.options.showRefresh"
                 v-b-tooltip.hover="{
@@ -34,7 +40,10 @@
                 class="d-flex align-items-center shortcuticon-color d-print-none border-0"
                 @click="$emit('refreshBlock')"
               >
-                <font-awesome-icon :icon="['fa', 'sync']" class="shortcuticon-medium" />
+                <font-awesome-icon
+                  :icon="['fa', 'sync']"
+                  class="shortcuticon-medium"
+                />
               </b-button>
               <b-button
                 v-if="block.options.magnifyOption || isBlockMagnified"
@@ -62,24 +71,36 @@
             </div>
           </div>
         </div>
-        <b-card-text v-if="blockDescription" class="text-dark text-wrap mt-1">
+        <b-card-text
+          v-if="blockDescription"
+          class="text-dark text-wrap mt-1"
+        >
           {{ blockDescription }}
         </b-card-text>
-        <slot v-else name="header" />
+        <slot
+          v-else
+          name="header"
+        />
       </b-card-header>
-      <b-card-body class="p-0 flex-fill" :class="{ 'overflow-auto': scrollableBody }">
+      <b-card-body
+        class="p-0 flex-fill"
+        :class="{ 'overflow-auto': scrollableBody }"
+      >
         <slot name="default" />
       </b-card-body>
-      <b-card-footer v-if="footerSet" class="p-0 bg-white border-top">
+      <b-card-footer
+        v-if="footerSet"
+        class="p-0 bg-white border-top"
+      >
         <slot name="footer" />
       </b-card-footer>
     </b-card>
   </div>
 </template>
 <script>
-import base from "./base.vue";
+import base from './base.vue'
 export default {
-  name: "CardWrap",
+  name: 'CardWrap',
   extends: base,
-};
+}
 </script>
