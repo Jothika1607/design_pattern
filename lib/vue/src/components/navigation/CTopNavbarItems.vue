@@ -77,7 +77,7 @@
         variant="none"
         class="nav-active"
         >
-  <b-dropdown-item v-for="({page = {}, params = {},})  of children" :key="page.name" :to="{ name: page.name || defaultRouteName, params }">
+  <b-dropdown-item v-for="({page = {}, params = {},})  of children" :key="page.name" :to="{ name: page.name || defaultRouteName, params }" :title="page.title">
     
     {{ page.title }}
     <!-- <c-top-navbar-items
