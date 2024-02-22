@@ -17,28 +17,66 @@
       width="78px"
       height="32px"
       src="
-      http://52.66.61.197:18080/assets/logo.png"/>
+      http://65.108.153.104:18080/assets/logo.png"/>
     </div>
+
+    <div class="search-container">
+      <input
+              v-model="searchTerm"
+              @input="handleInput"
+              type="text"
+              placeholder="Search case here"
+              class="search-bar"
+            />
+      <span class="search-icon">
+        <font-awesome-icon :icon="['fas', 'search']" />
+      </span>
+      </div>   
  
-    <div class="tools-wrapper py-1 ml-auto">
+    <div class="tools-wrapper py-1 ml-auto mr-4">
       <slot name="tools" />
     </div>
  
-    <div class="d-flex align-items-center ml-auto">
+    <div class="d-flex align-items-center ml-auto icon-space">
+        <div class="d-flex icon-colour align-items-center">
       <b-button
         v-if="!hideAppSelector && !settings.hideAppSelector"
         data-test-id="app-selector"
         variant="outline-light"
-        :href="appSelectorURL"
         title="Apps"
         size="lg"
-        class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap"
+        :href="appSelectorURL"
+        class="d-flex align-items-center justify-content-center border-0 nav-icon rounded-circle text-sm-nowrap icon-position"
       >
         <font-awesome-icon
-          class="m-0 h5"
+          class="m-0 h5 icon-grip"
           :icon="['fas', 'grip-horizontal']"
-        />
+        /> 
+      
+
       </b-button>
+          <b-dropdown
+             text="Case Management"
+             variant="none"
+             class="m-md-2 dropdown-style"
+           >
+               <b-dropdown-item>Case Management</b-dropdown-item>
+               <b-dropdown-item href="http://52.66.61.197:18080/admin/system/application/list">Admin View</b-dropdown-item>
+           </b-dropdown>
+         </div>
+
+         <b-button
+         v-if="!hideAppSelector && !settings.hideAppSelector"
+         data-test-id="app-selector"
+         variant="none"
+         size="lg"
+         class="d-flex align-items-center justify-content-center text-dark border-0 nav-icon rounded-circle text-sm-nowrap"
+       >
+         <font-awesome-icon
+           class="m-0 h5 icon-bell" 
+           :icon="['far', 'bell']"
+         />
+       </b-button>
  
       <b-dropdown
         v-if="!settings.hideHelp"
@@ -56,8 +94,8 @@
             class="d-flex align-items-center justify-content-center"
           >
             <font-awesome-icon
-              class="m-0 h5"
-              :icon="['far', 'question-circle']"
+              class="m-0 h5 icon-question"
+              :icon="['fas', 'question-circle']"
             />
             <span class="sr-only">
               {{ labels.helpForum }}
@@ -104,7 +142,6 @@
         />
         <b-dropdown-item
           disabled
-          class="small"
         >
           {{ labels.helpVersion }}
           <br>
@@ -117,17 +154,15 @@
         data-test-id="dropdown-profile"
         data-v-onboarding="profile"
         :variant="avatarExists ? 'link' : 'outline-light'"
-        :toggle-class="`nav-icon text-decoration-none text-dark rounded-circle border ${avatarExists ? 'p-0' : ''}`"
-        size="lg"
+        :toggle-class="`nav-icon text-decoration-none rounded-circle border d-flex align-items-center carat-test  p-0  ${avatarExists ? 'p-0' : ''}`"
         right
-        menu-class="topbar-dropdown-menu border-0 shadow-sm text-dark font-weight-bold mt-2"
-        no-caret
-        class="nav-user-icon"
+        menu-class="topbar-dropdown-menu border-0 shadow-sm font-weight-bold mt-2 "
+        class="nav-user-icon profile"
       >
         <template #button-content>
           <div
             v-if="avatarExists"
-            class="avatar d-flex h-100"
+            class="avatar d-flex"
             :style="{
               'background-image': avatarExists  ? `url(${profileAvatarUrl})` : 'none',
             }"
@@ -138,7 +173,7 @@
             class="d-flex align-items-center justify-content-center"
           >
             <font-awesome-icon
-              class="m-0 h5"
+              class="m-0 h5 icon-profile"
               :icon="['far', 'user']"
             />
             <span class="sr-only">
@@ -297,8 +332,8 @@ $nav-user-icon-size: 40px;
 }
  
 .nav-user-icon {
-  min-width: $nav-user-icon-size;
-  min-height: $nav-user-icon-size;
+  width: 40px;
+  height: 40px;
 }
  
 .header-navigation {
@@ -312,13 +347,8 @@ $nav-user-icon-size: 40px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
- 
-  &:hover {
-    opacity: 0.8;
-    transition: opacity .25s ease-in-out;
-    -moz-transition: opacity .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out;
-  }
+  width: 40px;
+  height: 40px;
 }
  
 .spacer {
@@ -363,6 +393,88 @@ $nav-user-icon-size: 40px;
     flex-wrap: wrap;
   }
 }
+
+.icon-space{
+  gap: 56px;
+  width: 626px;
+  height: 40px;
+}
+.icon-colour :hover{
+  color: #3D6ECF;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border: none;
+}
+ 
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  color:#373737;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar{
+    width: 497px;
+    height: 48px;
+    border: 1px solid #878787;
+    border-radius: 8px;
+    padding-left: 20px;
+    color: #878787 !important;
+}
+
+span.search-icon svg.fa-search{
+  width:23px;
+  height:23px;
+}
+
+.search-bar::placeholder {
+width: 145px;
+height:22px; /* Set the width of the placeholder text */
+line-height: 22px; /* Add padding to the left of the placeholder text */
+}
+
+.icon-grip{
+  width: 28px !important;
+  height: 28px !important;
+  color: #525252;
+}
+
+.icon-bell{
+  width: 28px !important;
+  height: 32px !important;
+  color: #525252;
+}
+
+.icon-question{
+  width: 32px !important;
+  height: 32px !important;
+  color: #525252;
+}
+.icon-profile{
+  width: 40px !important;
+  height: 32px !important;
+  color: #525252;
+}
+
+.profile{
+  width: 72px;
+  height: 40px;
+
+}
+
 </style>
  
 <style lang="scss">

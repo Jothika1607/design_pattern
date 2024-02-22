@@ -4,7 +4,7 @@
       v-for="({page = {}, params = {}, children = []}) of items"
       :key="pageIndex(page)"
       variant="link"
-      class="w-100 text-dark text-decoration-none p-0 nav-item d-flex"
+      class="w-100 text-decoration-none p-0 nav-item d-flex"
       active-class="nav-active"
       exact-active-class="nav-active"
       :title="page.title"
@@ -31,46 +31,67 @@
             />
           </template>
         </template>
-        <label
+        <!-- <label
           class="title mb-0 pointer"
         >
           {{ page.title }}
-        </label>
+        </label> -->
       </span>
  
       <template
         v-if="children.length"
       >
-        <b-button
-          variant="None"
-          size="sm"
-          class="text-primary p-0 border-0 float-right mr-1 caret-button"
-          @click.self.stop.prevent="toggle(page)"
+      <!-- <b-button
+      variant="None"
+      size="sm"
+      class="text-primary p-0 border-0 float-right mr-1 caret-button"
+      @click.self.stop.prevent="toggle(page)"
+    >
+      <font-awesome-icon
+        v-if="!collapses[pageIndex(page)]"
+        class="pointer-none"
+        :icon="['fas', 'caret-down']"
+      />
+      <font-awesome-icon
+        v-else
+        class="pointer-none"
+        :icon="['fas', 'caret-up']"
+      />
+    </b-button>
+
+    <b-collapse
+      class="position-absolute sub-nav-item"
+      :visible="collapses[pageIndex(page)]"
+      @click.stop.prevent
+      ref="dropdown"
+    >
+      <c-top-navbar-items
+        :items="children"
+        :start-expanded="startExpanded"
+        :default-route-name="defaultRouteName"
+        v-on="$listeners"
+      />
+    </b-collapse> -->
+                <b-dropdown 
+        :text="page.title"
+        variant="none"
+        class="nav-active"
         >
-          <font-awesome-icon
-            v-if="!collapses[pageIndex(page)]"
-            class="pointer-none"
-            :icon="['fas', 'caret-down']"
-          />
-          <font-awesome-icon
-            v-else
-            class="pointer-none"
-            :icon="['fas', 'caret-up']"
-          />
-        </b-button>
- 
-        <b-collapse class="position-absolute sub-nav-item"
-          :visible="collapses[pageIndex(page)]"
-          @click.stop.prevent
-        >
-          <c-top-navbar-items
-            :items="children"
-            :start-expanded="startExpanded"
-            :default-route-name="defaultRouteName"
-            v-on="$listeners"
-          />
-        </b-collapse>
+  <b-dropdown-item v-for="({page = {}, params = {},})  of children" :key="page.name" :to="{ name: page.name || defaultRouteName, params }" :title="page.title">
+    
+    {{ page.title }}
+    <!-- <c-top-navbar-items
+      :items="children"
+      :start-expanded="startExpanded"
+      :default-route-name="defaultRouteName"
+      v-on="$listeners"
+    /> -->
+</b-dropdown-item>
+</b-dropdown>
+
       </template>
+      <template v-else>
+        <span>{{ page.title }}</span></template>
     </b-button>
   </div>
 </template>
@@ -127,13 +148,12 @@ export default {
       }
     },
  
-    pageIndex (p) {
-      return p.pageID || p.name || p.title
+    toggle(p) {
+      const px = this.pageIndex(p);
+      this.$set(this.collapses, px, !this.collapses[px]);
     },
- 
-    toggle (p) {
-      const px = this.pageIndex(p)
-      this.$set(this.collapses, px, !this.collapses[px])
+    pageIndex(p) {
+      return p.pageID || p.name || p.title;
     },
  
     // Recursively check for child pages that are open, so that parents can open as well
@@ -168,29 +188,16 @@ export default {
 }
  
 .sub-nav-item{
-  position: absolute;
-  transform: translateY(81px);
-  z-index: 2;
-  >div{
     background: white;
     border: 1px solid white;
-    flex-direction: column;
-  }
-  
-  .nav-sidebar {
-    width: 199px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    transform: translateX(-21px);
-  }
- 
   .nav-active{
     border-bottom-color: white !important;
   }
 }
+
  
 .nav-item > span {
-  .title {
+  button {
     color: var(--tertiary);
   }
 }
@@ -207,7 +214,7 @@ export default {
     color: var(--primary)
   }
  
-  .title {
+  .btn {
     font-family: 'Roboto-Regular';
     color: var(--primary);
     transition: color 0.5s

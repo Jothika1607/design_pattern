@@ -54,6 +54,22 @@
           cols="12"
         >
           <b-form-group
+            label="Panel Class"
+            label-class="text-primary"
+          >
+            <b-input-group>
+              <b-form-input
+                id="dom_id"
+                v-model="block.panelclass"
+                placeholder="Enter Panel class"
+              />
+            </b-input-group>
+          </b-form-group>
+        </b-col>
+        <b-col
+          cols="12"
+        >
+          <b-form-group
             :label="$t('general.descriptionLabel')"
             label-class="text-primary"
           >
@@ -113,6 +129,13 @@
             switch
           >
             {{ $t('general.wrap') }}
+          </b-form-checkbox>
+
+          <b-form-checkbox
+            v-model="block.style.display"
+            switch
+          >
+            Display block as View Only
           </b-form-checkbox>
 
           <b-form-checkbox
