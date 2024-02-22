@@ -45,6 +45,7 @@ type (
 		BlockID uint64         `json:"blockID,string,omitempty" yaml:"blockID"`
 		XYWH    [4]int         `json:"xywh" yaml:"xywh"`
 		Meta    map[string]any `json:"meta,omitempty"`
+		PanelClass string `json:"panelclass,omitempty"`
 	}
 
 	PageLayoutMeta struct {

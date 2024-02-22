@@ -73,6 +73,7 @@ type (
 		//          struct field is kept for the convenience for now since it allows us
 		//          easy encoding/decoding of the outgoing/incoming values
 		Description string `json:"description,omitempty"`
+		PanelClass string `json:"panelclass,omitempty"`
 	}
 
 	PageMeta struct {
@@ -83,6 +84,7 @@ type (
 		Variants map[string]string      `json:"variants,omitempty"`
 		Wrap     map[string]string      `json:"wrap,omitempty"`
 		Border   map[string]interface{} `json:"border,omitempty"`
+		Display  map[string]interface{} `json:"display,omitempty"`
 	}
 
 	PageConfig struct {

@@ -546,9 +546,39 @@ a.nav-active{
 }
 
 .sample{
-  // width:848px !important;
-  // height:169px !important;
-  color:#3D6ECF;
+   width: 848px !important;
+   height: 169px !important;
+  div.card{
+    width: 848px;
+    height: 169px !important;
+
+    .card-header{
+      background-color: #E7EFFD !important;
+    }
+  
+   .card-body div{
+     display: flex !important;
+     gap: 64px !important;
+
+     fieldset {
+      legend div span{
+        font-size: 13px;
+        font-weight: 500;
+        color: #878787;
+        white-space: nowrap;
+      }
+      div div.value div div{
+        font-size: 16px !important;
+        font-weight: 400;
+        p{
+          font-size: 16px !important;
+          font-weight: 400;
+        }
+      }
+       
+    }
+   }
+  }
 }
 .record-list-table tbody{
   tr{
@@ -570,10 +600,6 @@ a.nav-active{
 
 // .card-header{
 //   color: red !important;
-// }
-
-// .card-body div{
-//   display: flex !important;
 // }
 
 // .card{

@@ -13,8 +13,8 @@ module.exports = ({ appFlavour, appLabel, version = process.env.BUILD_VERSION, t
   }
 
   if (isDevelopment) {
-  Vue.config.devtools = true
-  Vue.config.performance = true
+    Vue.config.devtools = true
+    Vue.config.performance = true
   }
 
   const optimization = isTest ? {} : {
