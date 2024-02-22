@@ -446,7 +446,7 @@ a.nav-active{
  }
 
 .search-r{
-  width:357px;
+  width:560px;
   height: 48px;
   padding:0px 8px;
   border: 1px solid #878787 !important;
@@ -454,9 +454,8 @@ a.nav-active{
   color: #878787 !important;
 }
 
-.button-space .btn:hover{
-  background-color: #3D6ECF;
-  color: #FFFFFF;
+.button-space .btn{
+  color: #3D6ECF;
 }
 
 .table-hover tbody tr:hover {
@@ -472,24 +471,25 @@ a.nav-active{
   margin-left: 16px;
 }
 
-button.carat-test{
-  color: #373737 ;
-}
+// button.carat-test{
+//   color: #373737 ;
+// }
 
-button.carat-test:hover{
-  color: #373737 ;
-}
+// button.carat-test:hover{
+//   color: #373737 ;
+// }
 
 .custom-checkbox .custom-control-label::before {
-  border-radius: 4px !important;
-  width: 40px;
-  height: 40px;
+  border-radius: 2.4px !important;
+  width: 24px;
+  height: 24px;
   top: 0px !important;
 }
 
 .custom-control-label::after {
-  width: 40px;
-  height: 40px;
+  border-radius: 2.4px !important;
+  width: 24px;
+  height: 24px;
   top: 0px !important;
 }
 
@@ -497,9 +497,93 @@ button.carat-test:hover{
    border-radius: 8px !important;
 }
 
-tbody{
+.vertical-line::after {
+  content: '';
+  display: block;
+  border-left: 0.5px solid #D4D4D4; /* Adjust color and thickness as needed */
+  height:100%; /* Adjust height as needed */
+}
+
+.shortcuticon-color{
+  color:#878787;
+  width: 24px;
+  height:24px;
+  justify-content: center;
+}
+.shortcuticon-medium{
+    width:22px !important;
+    height: 21px !important;
+}
+
+.search-body{
+  padding: 24px 16px 24px 16px;
+}
+
+.shortcut-icon{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap:8px;
+  color: #878787 !important;
+}
+
+.btn:hover {
+    color:#878787!important;
+    background-color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+}
+
+.headtitle{
+   font-size:23px;
+   font-weight: 500;
+   color:#373737;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.pagination{
+  color: #3D6ECF;
+}
+
+.sample{
+   width: 848px !important;
+   height: 169px !important;
+  div.card{
+    width: 848px;
+    height: 169px !important;
+
+    .card-header{
+      background-color: #E7EFFD !important;
+    }
+  
+   .card-body div{
+     display: flex !important;
+     gap: 64px !important;
+
+     fieldset {
+      legend div span{
+        font-size: 13px;
+        font-weight: 500;
+        color: #878787;
+        white-space: nowrap;
+      }
+      div div.value div div{
+        font-size: 16px !important;
+        font-weight: 400;
+        p{
+          font-size: 16px !important;
+          font-weight: 400;
+        }
+      }
+       
+    }
+   }
+  }
+}
+.record-list-table tbody{
   tr{
     td{
+      vertical-align: middle;
       div{
         div{
           white-space: nowrap;
@@ -513,3 +597,11 @@ tbody{
     }
   }
 }
+
+// .card-header{
+//   color: red !important;
+// }
+
+// .card{
+//   width: 848px !important;
+// }

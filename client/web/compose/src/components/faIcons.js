@@ -70,6 +70,7 @@ import {
   faUsers,
   faQuestionCircle,
   faFolder,
+  faFileImport,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -187,4 +188,5 @@ library.add(
   faUsers,
   faSearch,
   faFolder,
+  faFileImport,
 )

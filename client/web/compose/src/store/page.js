@@ -79,6 +79,9 @@ export default function (ComposeAPI) {
         commit(types.pending)
         return ComposeAPI.pageRead({ namespaceID, pageID }).then(raw => {
           const page = new compose.Page(raw)
+          page.blocks.forEach(block => {
+            block.domid = raw.blocks.find(bl => bl.blockID === block.blockID).domid
+          })
           commit(types.updateSet, [page])
           return page
         }).finally(() => {

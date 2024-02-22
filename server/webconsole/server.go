@@ -13,7 +13,6 @@ var (
 	// file inside. If only dist (w/o) wildcard is used,
 	// dot-file (.placeholder) will be ignored
 
-	//go:embed dist/*
 	assets embed.FS
 )
 
