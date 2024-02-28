@@ -846,23 +846,23 @@ func applySmtpOptionsToSettings(ctx context.Context, log *zap.Logger, opt option
 		TlsServerName: opt.TlsServerName,
 	}
 
-	if len(current.SMTP.Servers) > 0 {
-		if current.SMTP.Servers[0] != *optServer {
-			// ENV variables changed OR settings changed.
-			// One way or the other, this can lead to unexpected situations
-			//
-			// Let's log a warning
-			log.Warn(
-				"Environmental variables (SMTP_*) and SMTP settings " +
-					"(most likely changed via admin console) are not the same. " +
-					"When server was restarted, values from environmental " +
-					"variables were copied to settings for easier management. " +
-					"To avoid confusion and potential issues, we suggest you to " +
-					"remove all SMTP_* variables")
-		}
+	// if len(current.SMTP.Servers) > 0 {
+	// 	if current.SMTP.Servers[0] != *optServer {
+	// 		// ENV variables changed OR settings changed.
+	// 		// One way or the other, this can lead to unexpected situations
+	// 		//
+	// 		// Let's log a warning
+	// 		log.Warn(
+	// 			"Environmental variables (SMTP_*) and SMTP settings " +
+	// 				"(most likely changed via admin console) are not the same. " +
+	// 				"When server was restarted, values from environmental " +
+	// 				"variables were copied to settings for easier management. " +
+	// 				"To avoid confusion and potential issues, we suggest you to " +
+	// 				"remove all SMTP_* variables")
+	// 	}
 
-		return
-	}
+	// 	return
+	// }
 
 	// SMTP server settings do not exist but
 	// there is something in the options (SMTP_HOST)
