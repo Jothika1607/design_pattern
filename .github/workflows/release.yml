@@ -349,11 +349,11 @@ jobs:
           tar -C dist -czf corteza-${{ env.BUILD_VERSION }}-linux-amd64.tar.gz $(dir dist)
       - name: "Upload"
         run: |
-          echo ${{ env.RELEASE_SFTP_KEY }} | base64 -d > .upload-rsa
-          chmod 0400 .upload-rsa
+          echo ${{ env.RELEASE_SFTP_KEY }} | base64 -d > /tmp/upload-rsa
+          chmod 0400 /tmp/upload-rsa
           echo "put corteza-${{ env.BUILD_VERSION }}-linux-amd64.tar.gz" | \
-            sftp -q -o "StrictHostKeyChecking no" -i .upload-rsa ${{ env.RELEASE_SFTP_URI }}
-          rm -f .upload-rsa
+            sftp -q -o "StrictHostKeyChecking no" -i /tmp/upload-rsa ${{ env.RELEASE_SFTP_URI }}
+          rm -f /tmp/upload-rsa
         if: ${{ !env.ACT }}
 
   ########################################################################################################################

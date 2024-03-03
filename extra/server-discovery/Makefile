@@ -15,7 +15,7 @@ BUILD_BIN_NAME         = $(BUILD_NAME)$(if $(BUILD_OS_is_windows),.exe,)
 RELEASE_BASEDIR        = $(BUILD_DEST_DIR)/pkg/$(BUILD_FLAVOUR)-server
 RELEASE_NAME           = $(BUILD_NAME).tar.gz
 RELEASE_EXTRA_FILES   ?= README.md LICENSE CONTRIBUTING.md DCO .env.example
-RELEASE_PKEY          ?= .upload-rsa
+RELEASE_PKEY          ?= /tmp/upload-rsa
 
 LDFLAGS_VERSION        = -X github.com/cortezaproject/corteza/server/pkg/version.Version=$(BUILD_VERSION)
 LDFLAGS_EXTRA         ?=
@@ -47,8 +47,8 @@ upload: $(RELEASE_PKEY)
 
 $(RELEASE_PKEY):
 # 	@ echo $(RELEASE_SFTP_KEY) | base64 -d > $@
-	@ echo $(RELEASE_SFTP_KEY) | base64 -d > .upload-rsa
-	@ chmod 0400 .upload-rsa
+	@ echo $(RELEASE_SFTP_KEY) | base64 -d > $@
+	@ chmod 0400 $@
 
 ########################################################################################################################
 # Development
