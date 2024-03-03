@@ -5,6 +5,8 @@ name: "Release"
 #
 # Look for "!env.ACT" in the DRY_RUN expression below
 
+on: [push]
+
 #  push:
 #    tags:
 #      - '**'
