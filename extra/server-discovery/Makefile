@@ -48,7 +48,7 @@ upload: $(RELEASE_PKEY)
 $(RELEASE_PKEY):
 # 	@ echo $(RELEASE_SFTP_KEY) | base64 -d > $@
 #	@ echo "$(RELEASE_SFTP_KEY)" | base64 -d
-	@ echo "$(RELEASE_SFTP_KEY)" | base64 -d > $@
+	@ echo $(RELEASE_SFTP_KEY) | base64 -d > $@
 	@ chmod 0400 $@
 
 ########################################################################################################################
