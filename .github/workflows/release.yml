@@ -393,7 +393,6 @@ jobs:
         working-directory: extra/server-discovery/
         run: make release-clean release
       - name: "Upload"
-        working-directory: extra/server-discovery/
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: 'root'
@@ -402,6 +401,7 @@ jobs:
           local_path: 'build/corteza-server-discovery-refs/heads/*.tar.gz'
           remote_path: '/sftp_server'
           sftpArgs: '-o ConnectTimeout=5'
+        working-directory: extra/server-discovery/
 #        run: make upload
 #        run: |
 #          echo "put build/corteza-server-discovery-refs/heads/*.tar.gz" | \
