@@ -408,7 +408,7 @@ jobs:
     needs:
       - server-release
       - client-web-aio-release
-      - extra-server-discovery-release
+#      - extra-server-discovery-release
     strategy:
       fail-fast: true
       matrix:
