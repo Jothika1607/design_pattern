@@ -25,7 +25,7 @@ env:
 jobs:
   server-test:
     name: "Server tests"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       GOFLAGS: -mod=readonly
     steps:
