@@ -398,8 +398,8 @@ jobs:
         run: |
           echo ${{ env.RELEASE_SFTP_KEY }} | base64 -d > /tmp/upload-rsa
           chmod 0400 /tmp/upload-rsa
-          echo "put extra/server-discovery/*.tar.gz" | \
-            sftp -q -o "StrictHostKeyChecking no" -i /tmp/upload-rsa ${{ env.RELEASE_SFTP_URI }}
+          echo "put build/corteza-server-discovery-refs/heads/*.tar.gz" | \
+            sftp -q -o "StrictHostKeyChecking no" -i ${{ secrets.RELEASE_SFTP_URI }} ${{ secrets.RELEASE_SFTP_URI }}
           rm -f /tmp/upload-rsa
         if: ${{ !env.ACT }}
 
