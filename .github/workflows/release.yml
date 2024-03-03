@@ -394,10 +394,18 @@ jobs:
         run: make release-clean release
       - name: "Upload"
         working-directory: extra/server-discovery/
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: 'root'
+          server: '65.108.153.104'
+          ssh_private_key: ${{ secrets.RELEASE_SFTP_KEY }}
+          local_path: 'build/corteza-server-discovery-refs/heads/*.tar.gz'
+          remote_path: '/sftp_server'
+          sftpArgs: '-o ConnectTimeout=5'
 #        run: make upload
-        run: |
-          echo "put build/corteza-server-discovery-refs/heads/*.tar.gz" | \
-            sftp -q -o "StrictHostKeyChecking no" -i ${{ secrets.RELEASE_SFTP_URI }} ${{ secrets.RELEASE_SFTP_URI }}
+#        run: |
+#          echo "put build/corteza-server-discovery-refs/heads/*.tar.gz" | \
+#            sftp -q -o "StrictHostKeyChecking no" -i ${{ secrets.RELEASE_SFTP_URI }} ${{ secrets.RELEASE_SFTP_URI }}
         if: ${{ !env.ACT }}
 
 
