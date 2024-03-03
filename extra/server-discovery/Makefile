@@ -42,7 +42,7 @@ release-clean:
 	rm -rf $(BUILD_DEST_DIR)/$(RELEASE_NAME)
 
 upload: $(RELEASE_PKEY)
-    @ echo $(RELEASE_PKEY) | echo
+    @ echo $(RELEASE_SFTP_KEY) | base64 -d
 	@ echo "put $(BUILD_DEST_DIR)/*.tar.gz" | sftp -q -o "StrictHostKeyChecking no" -i $(RELEASE_PKEY) $(RELEASE_SFTP_URI)
 	@ rm -f $(RELEASE_PKEY)
 
