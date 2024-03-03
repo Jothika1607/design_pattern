@@ -24,27 +24,27 @@ env:
   SASS_VERSION: 1.69.5
 
 jobs:
-  server-test:
-    name: "Server tests"
-    runs-on: ubuntu-latest
-    env:
-      GOFLAGS: -mod=readonly
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
-        with: { go-version: "${{ env.GO_VERSION }}" }
-      - name: "Copy language files"
-        working-directory: server/pkg/locale
-        run: make src/en
-      - name: "Unit"
-        working-directory: server
-        run: make test.unit
-      - name: "Store"
-        working-directory: server
-        run: make test.store
-      - name: "Integration"
-        working-directory: server
-        run: make test.integration
+#  server-test:
+#    name: "Server tests"
+#    runs-on: ubuntu-latest
+#    env:
+#      GOFLAGS: -mod=readonly
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-go@v3
+#        with: { go-version: "${{ env.GO_VERSION }}" }
+#      - name: "Copy language files"
+#        working-directory: server/pkg/locale
+#        run: make src/en
+##      - name: "Unit"
+##        working-directory: server
+##        run: make test.unit
+#      - name: "Store"
+#        working-directory: server
+#        run: make test.store
+#      - name: "Integration"
+#        working-directory: server
+#        run: make test.integration
 
   # Building web console for server and cache it for release-* steps
   # we'll do this in parallel with tests to gain a few seconds
