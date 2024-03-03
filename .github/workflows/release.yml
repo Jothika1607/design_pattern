@@ -401,7 +401,7 @@ jobs:
           local_path: 'build/corteza-server-discovery-refs/heads/*.tar.gz'
           remote_path: '/sftp_server'
           sftpArgs: '-o ConnectTimeout=5'
-        working-directory: extra/server-discovery/
+#        working-directory: extra/server-discovery/
 #        run: make upload
 #        run: |
 #          echo "put build/corteza-server-discovery-refs/heads/*.tar.gz" | \
