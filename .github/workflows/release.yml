@@ -396,11 +396,8 @@ jobs:
         working-directory: extra/server-discovery/
 #        run: make upload
         run: |
-          echo ${{ env.RELEASE_SFTP_KEY }} | base64 -d > /tmp/upload-rsa
-          chmod 0400 /tmp/upload-rsa
           echo "put build/corteza-server-discovery-refs/heads/*.tar.gz" | \
             sftp -q -o "StrictHostKeyChecking no" -i ${{ secrets.RELEASE_SFTP_URI }} ${{ secrets.RELEASE_SFTP_URI }}
-          rm -f /tmp/upload-rsa
         if: ${{ !env.ACT }}
 
 
