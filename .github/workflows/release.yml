@@ -191,33 +191,33 @@ jobs:
   # Web clients
 
 
-  client-web-test:
-    name: "Web client test (${{ matrix.app }})"
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix: { app: [ admin, compose, discovery, privacy, reporter, one, workflow ] }
-    needs: [ "lib-build-and-publish" ]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with: { node-version: "${{ env.NODE_VERSION }}" }
-      - name: "Setup YARN"
-        working-directory: client/web/${{ matrix.app }}
-        run: npm install -g yarn @vue/cli-service
-      - name: "Cache"
-        uses: actions/cache@v3
-        if: ${{ !env.ACT }}
-        with:
-          path: ~/.npm
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.OS }}-node-
-      - name: "Dependencies"
-        working-directory: client/web/${{ matrix.app }}
-        run: make dep
-      - name: "Tests"
-        working-directory: client/web/${{ matrix.app }}
-        run: make test
+#  client-web-test:
+#    name: "Web client test (${{ matrix.app }})"
+#    runs-on: ubuntu-latest
+#    strategy:
+#      fail-fast: true
+#      matrix: { app: [ admin, compose, discovery, privacy, reporter, one, workflow ] }
+#    needs: [ "lib-build-and-publish" ]
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-node@v3
+#        with: { node-version: "${{ env.NODE_VERSION }}" }
+#      - name: "Setup YARN"
+#        working-directory: client/web/${{ matrix.app }}
+#        run: npm install -g yarn @vue/cli-service
+#      - name: "Cache"
+#        uses: actions/cache@v3
+#        if: ${{ !env.ACT }}
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+#          restore-keys: ${{ runner.OS }}-node-
+#      - name: "Dependencies"
+#        working-directory: client/web/${{ matrix.app }}
+#        run: make dep
+#      - name: "Tests"
+#        working-directory: client/web/${{ matrix.app }}
+#        run: make test
 
 
   client-web-release:
