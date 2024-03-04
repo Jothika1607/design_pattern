@@ -105,8 +105,16 @@ jobs:
         working-directory: server
         run: make release-clean release
       - name: "Upload"
-        working-directory: server
-        run: make upload
+#        working-directory: server
+#        run: make upload
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: 'root'
+          server: '65.108.153.104'
+          ssh_private_key: ${{ secrets.RELEASE_SFTP_KEY }}
+          local_path: 'server/build/corteza-server-refs/heads/*.tar.gz'
+          remote_path: '/sftp_server'
+          sftpArgs: '-o ConnectTimeout=5'
         if: ${{ !env.ACT }}
 
 
