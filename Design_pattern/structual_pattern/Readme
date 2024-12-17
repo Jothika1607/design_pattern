@@ -1,0 +1,46 @@
+Structural Pattern: 
+~~~~~~~~~~~~~~~~~~~
+
+        A Structural Pattern is a type of design pattern that focuses on how objects and classes are composed to form larger, more flexible structures while ensuring that these structures are efficient and easy to maintain. These patterns define ways to simplify relationships between entities, often using inheritance and interfaces to build robust and scalable systems. 
+
+
+Key Characteristics of Structural Patterns :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Composition: Emphasizes composing objects and classes to create new functionality. 
+
+        Decoupling: Promotes loose coupling between components by abstracting dependencies. 
+
+        Reusability: Encourages reuse of components by defining clear and standardized relationships. 
+
+        Flexibility: Makes it easier to adapt, extend, or modify components without significant changes. 
+
+
+Examples of Structural Patterns :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Adapter: Converts one interface into another to allow incompatible systems to work together. 
+
+        Bridge: Separates an abstraction from its implementation so they can evolve independently. 
+
+        Composite: Treats individual objects and compositions of objects uniformly. 
+
+        Decorator: Adds new functionality to an object dynamically without altering its structure. 
+
+        Facade: Provides a simplified interface to a complex subsystem. 
+
+        Flyweight: Reduces memory usage by sharing common parts of state between objects. 
+
+        Proxy: Provides a surrogate or placeholder to control access to another object. 
+
+These patterns are particularly useful for designing systems that require modularity, scalability, and maintainable relationships among components. 
+
+
+Example: Composite Pattern for CRUD Operations in E-Commerce 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        The Composite Pattern is a Structural Pattern that allows you to treat individual objects and compositions of objects uniformly. It is typically used when you need to represent part-whole hierarchies, like categories containing products or groups of products in an e-commerce system. 
+
+        For an e-commerce platform, we could use the Composite Pattern to handle product categories. A category could contain individual products (leaf nodes), or it could contain subcategories (composite nodes) that in turn contain products. This structure allows you to treat individual products and categories uniformly, performing CRUD operations across them. 
+
+ 
