@@ -1,0 +1,51 @@
+Behavioral Pattern: 
+~~~~~~~~~~~~~~~~~~~
+    A Behavioral Pattern is a type of design pattern that focuses on defining how objects and classes interact and collaborate to perform tasks and manage the flow of control within a system. These patterns aim to improve communication between entities, encapsulate behavior, and make the system more flexible and scalable. 
+
+
+Key Features of Behavioral Patterns :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Object Interaction: Emphasizes the communication and relationships between objects. 
+
+    Responsibility Sharing: Defines how responsibilities are distributed among different components. 
+
+    Encapsulation of Behavior: Encapsulates the logic of an action, enabling flexibility and reuse. 
+
+    Dynamic Behavior: Facilitates changes in behavior at runtime without altering the system's structure. 
+
+
+Examples of Behavioral Patterns :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Observer: Establishes a one-to-many dependency where changes in one object automatically notify others. 
+
+    Strategy: Encapsulates algorithms within separate classes, making them interchangeable. 
+
+    Command: Encapsulates requests or operations as objects, enabling queuing or logging of operations. 
+
+    State: Allows an object to change its behavior based on its state. 
+
+    Chain of Responsibility: Passes requests through a chain of handlers, where each handler decides whether to process the request or pass it along. 
+
+    Template Method: Defines the framework of an algorithm, letting subclasses refine certain steps. 
+
+    Mediator: Simplifies communication between objects by introducing a mediator that handles all interactions. 
+
+
+Purpose :
+~~~~~~~~~
+
+    Behavioral patterns help developers manage complex systems by organizing and simplifying the interactions between components, making systems more maintainable and extensible. 
+
+
+Example: Observer Pattern for CRUD Operations in E-Commerce :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        The Observer Pattern is a Behavioral Pattern that allows an object (subject) to notify other objects (observers) about changes in its state, without the observers needing to be tightly coupled to the subject. It’s useful for creating a subscription-based system where multiple components react to changes in a central entity. 
+
+        In an e-commerce application, a good example could be a Product Price Change Notification system. When a product’s price changes, observers (like customer services, price alert systems, or promotional systems) are notified to take appropriate actions (e.g., send alerts, apply discounts, etc.). 
+
+        In this case, we’ll implement a CRUD operation for products, where when a product’s price is updated (CRUD operation), observers will be notified, such as sending a price alert or updating promotional discounts. 
+
+ 
